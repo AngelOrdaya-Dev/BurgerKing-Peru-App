@@ -1,0 +1,2593 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Burger King® Perú – App Oficial</title>
+  <meta name="description" content="App Oficial de Burger King Perú. Pide a domicilio en Miraflores y Lima, acumula Coronas y personaliza tu Whopper a tu manera.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#D62300">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23D62300'/><text x='50' y='65' font-family='sans-serif' font-size='44' font-weight='900' fill='%23FFC72C' text-anchor='middle'>BK</text></svg>">
+  
+  <!-- Google Fonts: Titan One / Paytone One (Flame Display) & Plus Jakarta Sans (UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Titan+One&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet Map CSS for King Tracker Miraflores -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+
+
+  <!-- Main Canvas Wrapper -->
+  <main class="app-shell" id="appShell">
+
+    
+
+      
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 01: LOGIN & BIENVENIDA (/auth/login)               -->
+      <!-- ========================================================= -->
+      <section class="screen-view active" id="view-01-login" data-screen="01-login">
+        <header class="app-header">
+          <div class="header-brand-left" onclick="switchScreen('02-inicio')" style="cursor:pointer;">
+            <div class="bk-mini-logo">BK</div>
+            <div class="brand-text-col">
+              <span class="brand-country">PERÚ • APP OFICIAL</span>
+              <strong class="brand-page-title">Bienvenido</strong>
+            </div>
+          </div>
+          <div class="header-right-actions">
+            <div class="coronas-coin-pill" style="cursor:default;">
+              <span class="coin-symbol"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <span class="coin-val" style="font-size:11px;">Acceso Seguro</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-normal">
+          <!-- Official Tag -->
+          <div class="official-pill">
+            <span class="pin-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <span>BURGER KING PERÚ • <strong>Oficial</strong></span>
+          </div>
+
+          <!-- Flame Hero Text -->
+          <div class="login-hero-block">
+            <h2 class="flame-title-xl">SABOR 100% A LA <span class="highlight-flame">PARRILLA</span></h2>
+            <p class="flame-subtitle">Fuego auténtico, carne de verdad y el aroma inconfundible que conquista tu apetito.</p>
+          </div>
+
+          <!-- Hero Image Banner with Flame Badge -->
+          <div class="hero-image-card">
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&auto=format&fit=crop&q=80" alt="Burger King Parrilla" class="hero-img" loading="eager">
+            <div class="overlay-badge-bottom">
+              <span class="badge-icon"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+              <span>RECIÉN SALIDO DEL ASADOR</span>
+            </div>
+          </div>
+
+          <!-- Promo First Order Banner -->
+          <div class="promo-banner-card flame-gradient-bg">
+            <div class="promo-header-row">
+              <div class="promo-icon-badge"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+              <div class="promo-tags">
+                <span class="tag-pill-dark">SOLO EN APP</span>
+                <span class="tag-pill-gold">+100 Coronas BK</span>
+              </div>
+            </div>
+            <h3 class="promo-heading">¡20% OFF en tu primer pedido móvil!</h3>
+            <p class="promo-subtext">Regístrate hoy y canjea tus Coronas por Whoppers y complementos gratis.</p>
+          </div>
+
+          <!-- Auth Card Form -->
+          <div class="auth-form-card">
+            <!-- Recognized User Banner (Auto-detects saved/known user) -->
+            <div class="recognized-user-banner" id="recognizedUserBanner">
+              <div class="rec-user-left">
+                <div class="rec-avatar-wrap">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Usuario" id="recBannerAvatar">
+                  <span class="rec-online-dot"></span>
+                </div>
+                <div class="rec-user-info">
+                  <span class="rec-tag">CUENTA RECONOCIDA EN ESTE DISPOSITIVO</span>
+                  <strong id="recBannerName">Camila Rodríguez</strong>
+                  <span id="recBannerMeta">+51 987 654 321 • Nivel Rey Fuego (450 Coronas)</span>
+                </div>
+              </div>
+              <button type="button" class="btn-rec-continue" onclick="handleQuickRecognizedLogin()">
+                <span>Continuar como <span id="recBtnFirstName">Camila</span></span>
+                <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+
+            <!-- Tabs: Celular / Correo -->
+            <div class="segmented-auth-tabs">
+              <button class="auth-tab-btn active" id="tabPhone" onclick="toggleAuthTab('phone')">
+                <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> Celular (+51)</span>
+              </button>
+              <button class="auth-tab-btn" id="tabEmail" onclick="toggleAuthTab('email')">
+                <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Correo</span>
+              </button>
+            </div>
+
+            <!-- User Name Input -->
+            <div class="auth-input-group">
+              <div class="input-label-row">
+                <label class="field-label" for="loginNameInput">TU NOMBRE O ALIAS</label>
+                <span class="label-country-tag">Club BK</span>
+              </div>
+              <div class="password-input-wrapper">
+                <span class="input-prefix-icon"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                <input type="text" class="bk-input" id="loginNameInput" value="Camila Rodríguez" placeholder="Ingresa tu nombre (ej. Juan Pérez)" oninput="previewUserRecognition(this.value)">
+              </div>
+            </div>
+
+            <!-- Phone Tab Content -->
+            <div class="auth-input-group" id="groupPhone">
+              <div class="input-label-row">
+                <label class="field-label" id="loginContactLabel" for="loginPhoneInput">NÚMERO DE CELULAR</label>
+                <span class="label-country-tag">PE (+51)</span>
+              </div>
+              <div class="phone-input-wrapper">
+                <div class="country-prefix" id="phoneCountryPrefix">
+                  <span class="flag-icon"><svg width="18" height="13" viewBox="0 0 18 13" style="border-radius:2px; vertical-align:middle;"><rect width="18" height="13" fill="#D91023"/><rect x="6" width="6" height="13" fill="#FFFFFF"/></svg></span>
+                  <span class="code-txt">+51</span>
+                </div>
+                <input type="tel" class="bk-input" id="loginPhoneInput" value="987 654 321" placeholder="987 654 321" maxlength="40" oninput="lookupKnownUser(this.value)">
+              </div>
+              <span class="input-helper" id="loginContactHelper">Te enviaremos un código SMS de verificación segura.</span>
+            </div>
+
+            <!-- Password Field -->
+            <div class="auth-input-group">
+              <div class="input-label-row">
+                <label class="field-label">CONTRASEÑA O CÓDIGO BK</label>
+                <a href="javascript:void(0)" class="link-small" onclick="showToast('Enlace de recuperación enviado por SMS al +51 987 654 321')">¿Olvidaste tu clave?</a>
+              </div>
+              <div class="password-input-wrapper">
+                <span class="input-prefix-icon"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <input type="password" class="bk-input" id="loginPasswordInput" value="••••••••" placeholder="Tu contraseña">
+                <button type="button" class="eye-toggle-btn" onclick="togglePasswordVisibility()" aria-label="Mostrar contraseña"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              </div>
+            </div>
+
+            <!-- Primary Login CTA -->
+            <button class="btn-primary-flame w-full" id="btnLoginSubmit" onclick="handleLogin()">
+              <span>Iniciar Sesión</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+
+            <!-- Social Divider -->
+            <div class="auth-divider">
+              <span>O INGRESA CON</span>
+            </div>
+
+            <!-- Fast WhatsApp Login -->
+            <button class="btn-whatsapp-fast w-full" onclick="handleWhatsAppLogin()">
+              <span class="wa-icon"><svg class="bk-icon icon-whatsapp" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg></span>
+              <span>Ingreso rápido por WhatsApp</span>
+            </button>
+
+            <!-- OAuth Buttons (Google / Apple) -->
+            <div class="oauth-buttons-grid">
+              <button class="btn-oauth" onclick="handleOAuthLogin('Google')">
+                <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+                <span>Google</span>
+              </button>
+              <button class="btn-oauth" onclick="handleOAuthLogin('Apple')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.78 1.05-1.87.93-2.97-.9.04-2.02.6-2.67 1.37-.58.67-.99 1.77-.85 2.84 1.01.08 2.05-.51 2.59-1.24z"/></svg>
+                <span>Apple</span>
+              </button>
+            </div>
+          </div>
+            <span class="guest-btn-pill">Pedir rápido <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+
+          <!-- Legal & Features Footnote -->
+          <p class="legal-footnote">Al continuar confirmas que aceptas nuestros <a href="javascript:void(0)" onclick="openLegalModal()">Términos del Servicio</a> y <a href="javascript:void(0)" onclick="openLegalModal()">Aviso de Privacidad</a> de Burger King Perú.</p>
+          <div class="features-row-pills">
+            <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg> Entrega Veloz</span>
+            <span>•</span>
+            <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Garantía BK</span>
+            <span>•</span>
+            <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg> AutoKing y Tiendas</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 02: INICIO / FEED PRINCIPAL (/home)                -->
+      <!-- ========================================================= -->
+      <section class="screen-view" id="view-02-inicio" data-screen="02-inicio">
+        <!-- Home Header -->
+        <header class="app-header">
+          <div class="header-brand-left" onclick="switchScreen('02-inicio')" style="cursor:pointer;">
+            <div class="bk-mini-logo">BK</div>
+            <div class="brand-text-col">
+              <span class="brand-country">PERÚ</span>
+              <strong class="brand-page-title">Inicio</strong>
+            </div>
+          </div>
+          <div class="header-right-actions">
+            <div class="coronas-coin-pill" onclick="switchScreen('09-coronas')" title="Tus Coronas BK">
+              <span class="coin-symbol"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+              <span class="coin-val" id="topCoronasVal">450</span>
+            </div>
+            <div class="header-cart-icon-btn" onclick="switchScreen('05-cart')" title="Ver Carrito">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+              <span class="cart-badge-pill" id="homeCartBadge">3</span>
+            </div>
+            <div class="user-avatar-circle" onclick="switchScreen('10-perfil')" title="Mi Cuenta">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Camila">
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-normal">
+          <!-- Location & Greeting Bar -->
+          <div class="home-location-bar">
+            <div class="greeting-col">
+              <span class="loc-subtitle">BURGER KING MIRAFLORES</span>
+              <h2 class="greeting-title">¡Hola, Camila!</h2>
+            </div>
+            <div class="crown-badge-pill" onclick="switchScreen('09-coronas')">
+              <span class="crown-star"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+              <div class="crown-txt">
+                <span class="label">Coronas</span>
+                <span class="amount">450</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Segmented Toggle: Delivery / Para Llevar / Auto-King -->
+          <div class="service-segmented-bar">
+            <button class="service-pill-btn active" id="svcDelivery" onclick="selectServiceMode('delivery')">
+              <span class="svc-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><path d="M15 6h2"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
+              <span>Delivery (35-45m)</span>
+            </button>
+            <button class="service-pill-btn" id="svcTakeaway" onclick="selectServiceMode('takeaway')">
+              <span class="svc-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+              <span>Para Llevar</span>
+            </button>
+            <button class="service-pill-btn" id="svcAutoking" onclick="selectServiceMode('autoking')">
+              <span class="svc-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span>
+              <span>Auto-King</span>
+            </button>
+          </div>
+
+          <!-- Mega King Fest Banner Carousel -->
+          <div class="hero-promo-banner" onclick="quickAddComboPromo()">
+            <div class="promo-banner-badge-row">
+              <span class="badge-discount-tag">AHORRA 35%</span>
+              <span class="badge-fest-tag">MEGA KING FEST</span>
+            </div>
+            <div class="promo-banner-content-row">
+              <div class="promo-banner-text">
+                <h3 class="fest-title">2 Whopper® Clásicas</h3>
+                <p class="fest-desc">+ Papas familiares crocantes + 2 gaseosas 500ml flame-grilled.</p>
+                <div class="fest-price-row">
+                  <span class="old-price">S/ 61.40</span>
+                  <span class="current-price">S/ 39.90</span>
+                </div>
+                <button class="fest-order-btn">Pedir Ahora <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+              </div>
+              <div class="promo-banner-image">
+                <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=500&auto=format&fit=crop&q=80" alt="Mega King Fest Combo">
+              </div>
+            </div>
+            <div class="carousel-dots">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+
+          <!-- 1-Tap Reorder Card -->
+          <div class="reorder-section">
+            <div class="reorder-header">
+              <div class="reorder-title">
+                <span class="clock-icon"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                <strong>Reordenar en 1-Tap</strong>
+              </div>
+              <span class="reorder-timestamp">Último pedido (hace 4 días)</span>
+            </div>
+            <div class="reorder-card">
+              <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&auto=format&fit=crop&q=80" alt="Whopper Doble" class="reorder-thumb">
+              <div class="reorder-info">
+                <h4>Whopper® Doble</h4>
+                <p>Sin cebolla • Con Papa...</p>
+                <span class="reorder-price">S/ 31.50</span>
+              </div>
+              <button class="reorder-action-btn" onclick="quickReorder()" aria-label="Reordenar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Explore Menu Categories -->
+          <div class="explore-menu-section">
+            <div class="section-header-row">
+              <h3>Explora el Menú</h3>
+              <a href="javascript:void(0)" class="link-see-all" onclick="switchScreen('03-menu')">Ver todo</a>
+            </div>
+            <div class="categories-row-icons">
+              <button class="cat-icon-card active" onclick="openMenuWithCategory('res')">
+                <div class="cat-icon-circle flame-circle"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg></div>
+                <span>A la Parrilla</span>
+              </button>
+              <button class="cat-icon-card" onclick="openMenuWithCategory('pollo')">
+                <div class="cat-icon-circle"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a1 1 0 0 0 1-1C20.5 5.5 16.5 3 12 3S3.5 5.5 3 10a1 1 0 0 0 1 1z"/><path d="M3 17h18a2 2 0 0 1 0 4H3a2 2 0 0 1 0-4z"/><path d="M4 14h16"/></svg></div>
+                <span>Pollo Crujiente</span>
+              </button>
+              <button class="cat-icon-card" onclick="openMenuWithCategory('all')">
+                <div class="cat-icon-circle"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <span>Combos King</span>
+              </button>
+              <button class="cat-icon-card" onclick="openMenuWithCategory('snacks')">
+                <div class="cat-icon-circle"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 11l1.5 11h11L19 11"/><path d="M5 11h14"/><path d="M8 11V3"/><path d="M12 11V2"/><path d="M16 11V4"/></svg></div>
+                <span>Snacks & Papas</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Section: Lo Más Pedido en Lima -->
+          <div class="top-orders-section">
+            <div class="section-title-sub">
+              <h3>Lo Más Pedido en Lima</h3>
+              <p>Favoritos con sabor a la parrilla 100% vacuna</p>
+            </div>
+
+            <!-- 2x2 Grid of Top Items -->
+            <div class="menu-grid-2x2">
+              <!-- Item 1: Whopper Tejano -->
+              <div class="grid-food-card">
+                <div class="grid-card-media" style="cursor:pointer;" onclick="openCustomizer('Whopper® Tejano', 28.90, 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&auto=format&fit=crop&q=80')">
+                  <span class="badge-card-corner top1-badge">TOP 1</span>
+                  <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&auto=format&fit=crop&q=80" alt="Whopper Tejano">
+                </div>
+                <div class="grid-card-body">
+                  <h4>Whopper® Tejano</h4>
+                  <p>Salsa BBQ, tocino...</p>
+                  <div class="grid-card-footer">
+                    <span class="item-price">S/ 28.90</span>
+                    <button class="add-circle-btn" onclick="addToCartDirect('Whopper® Tejano', 28.90, 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=200&auto=format&fit=crop&q=80', 'Salsa BBQ ahumada, tocino crocante')">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2: Stacker Cuádruple -->
+              <div class="grid-food-card">
+                <div class="grid-card-media" style="cursor:pointer;" onclick="openCustomizer('Stacker® Cuádruple', 34.50, 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&auto=format&fit=crop&q=80')">
+                  <span class="badge-card-corner carnivore-badge">CARNÍVORO</span>
+                  <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&auto=format&fit=crop&q=80" alt="Stacker Cuádruple">
+                </div>
+                <div class="grid-card-body">
+                  <h4>Stacker® Cuádruple</h4>
+                  <p>4 carnes a la...</p>
+                  <div class="grid-card-footer">
+                    <span class="item-price">S/ 34.50</span>
+                    <button class="add-circle-btn" onclick="addToCartDirect('Stacker® Cuádruple', 34.50, 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=200&auto=format&fit=crop&q=80', '4 carnes a la parrilla, queso cheddar')">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3: King Pollo Deluxe -->
+              <div class="grid-food-card">
+                <div class="grid-card-media" style="cursor:pointer;" onclick="openCustomizer('King Pollo Deluxe', 24.90, 'https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=400&auto=format&fit=crop&q=80')">
+                  <img src="https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=400&auto=format&fit=crop&q=80" alt="King Pollo Deluxe">
+                </div>
+                <div class="grid-card-body">
+                  <h4>King Pollo Deluxe</h4>
+                  <p>Pechuga extra...</p>
+                  <div class="grid-card-footer">
+                    <span class="item-price">S/ 24.90</span>
+                    <button class="add-circle-btn" onclick="addToCartDirect('King Pollo Deluxe', 24.90, 'https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=200&auto=format&fit=crop&q=80', 'Pechuga crujiente, mayonesa y lechuga')">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 4: Onion Rings -->
+              <div class="grid-food-card">
+                <div class="grid-card-media" style="cursor:pointer;" onclick="openCustomizer('Aros de Cebolla Grandes', 11.90, 'https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=400&auto=format&fit=crop&q=80')">
+                  <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=400&auto=format&fit=crop&q=80" alt="Onion Rings">
+                </div>
+                <div class="grid-card-body">
+                  <h4>Onion Rings</h4>
+                  <p>Aros dorados y...</p>
+                  <div class="grid-card-footer">
+                    <span class="item-price">S/ 11.90</span>
+                    <button class="add-circle-btn" onclick="addToCartDirect('Aros de Cebolla Grandes', 11.90, 'https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=200&auto=format&fit=crop&q=80', 'Porción grande con dip de salsa BBQ')">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation Bar (5 tabs) -->
+        <nav class="bottom-nav-bar">
+          <button class="bottom-tab-btn" data-nav-target="02-inicio" onclick="switchScreen('02-inicio')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="tab-txt">Inicio</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="03-menu" onclick="switchScreen('03-menu')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a1 1 0 0 0 1-1C20.5 5.5 16.5 3 12 3S3.5 5.5 3 10a1 1 0 0 0 1 1z"/><path d="M3 17h18a2 2 0 0 1 0 4H3a2 2 0 0 1 0-4z"/><path d="M4 14h16"/></svg></span>
+            <span class="tab-txt">Menú</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="09-coronas" onclick="switchScreen('09-coronas')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+            <span class="tab-txt">Coronas</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="08-cupones" onclick="switchScreen('08-cupones')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+            <span class="tab-txt">Cupones</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="07-tracker" onclick="switchScreen('07-tracker')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+            <span class="tab-txt">Pedidos</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="10-perfil" onclick="switchScreen('10-perfil')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span class="tab-txt">Yo</span>
+          </button>
+        </nav>
+      </section>
+
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 03: MENÚ DIGITAL (/menu)                           -->
+      <!-- ========================================================= -->
+      <section class="screen-view" id="view-03-menu" data-screen="03-menu">
+        <header class="app-header">
+          <div class="header-brand-left" onclick="switchScreen('02-inicio')" style="cursor:pointer;">
+            <div class="bk-mini-logo">BK</div>
+            <div class="brand-text-col">
+              <span class="brand-country">PERÚ</span>
+              <strong class="brand-page-title">Menú</strong>
+            </div>
+          </div>
+          <div class="header-right-actions">
+            <div class="coronas-coin-pill" onclick="switchScreen('09-coronas')" title="Tus Coronas BK">
+              <span class="coin-symbol"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+              <span class="coin-val">450</span>
+            </div>
+            <div class="header-cart-icon-btn" onclick="switchScreen('05-cart')" title="Ver Carrito">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+              <span class="cart-badge-pill">3</span>
+            </div>
+            <div class="user-avatar-circle" onclick="switchScreen('10-perfil')" title="Mi Cuenta">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Camila">
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-floating">
+          <!-- Delivery Location selector pill -->
+          <div class="location-chips-row">
+            <button class="loc-chip active" id="menuLocDelivery" onclick="selectMenuLocationChip('delivery', this)">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><path d="M15 6h2"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg> Delivery a Casa</span>
+              <span class="arrow-down">▾</span>
+            </button>
+            <button class="loc-chip" id="menuLocTakeaway" onclick="selectMenuLocationChip('takeaway', this)">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><line x1="9" y1="9" x2="9" y2="9.01"/><line x1="15" y1="9" x2="15" y2="9.01"/></svg> Para Llevar (Jockey)</span>
+            </button>
+          </div>
+
+          <!-- Search Input -->
+          <div class="menu-search-wrapper">
+            <span class="search-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+            <input type="text" class="menu-search-input" id="menuSearchInput" placeholder="Buscar hamburguesas, combos, bebidas..." oninput="handleMenuSearch(this.value)">
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="filter-pills-row">
+            <button class="filter-pill" onclick="toggleMenuFilter(this, 'veggie')">Vegetariano</button>
+            <button class="filter-pill" onclick="toggleMenuFilter(this, 'spicy')">Picante BK</button>
+            <button class="filter-pill" onclick="toggleMenuFilter(this, 'gluten')">Sin Gluten</button>
+          </div>
+
+          <!-- Category Tabs -->
+          <div class="category-toggle-tabs">
+            <button class="cat-pill active" data-cat-pill="all" onclick="filterMenuByCategory('all', this)">Todo el Menú</button>
+            <button class="cat-pill" data-cat-pill="res" onclick="filterMenuByCategory('res', this)">Hamburguesas de Res</button>
+            <button class="cat-pill" data-cat-pill="pollo" onclick="filterMenuByCategory('pollo', this)">Pollo &amp; Crispy</button>
+            <button class="cat-pill" data-cat-pill="snacks" onclick="filterMenuByCategory('snacks', this)">Snacks &amp; Papas</button>
+          </div>
+
+          <!-- Section: Hamburguesas de Res -->
+          <div class="menu-catalog-section">
+            <div class="catalog-section-header">
+              <div>
+                <h3>Hamburguesas de Res</h3>
+                <p>100% carne flame-grilled hecha al momento</p>
+              </div>
+              <span class="options-count-badge">5 OPCIONES</span>
+            </div>
+
+            <!-- List of Menu Items -->
+            <div class="menu-items-list" id="menuItemsList">
+              <!-- Item 1: Whopper Clásica -->
+              <div class="menu-item-card" data-category="res" data-tags="parrilla">
+                <div class="item-card-image-wrap">
+                  <div class="item-badges-overlay">
+                    <span class="badge-flame"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg> A la parrilla</span>
+                    <span class="badge-best">Más Vendido</span>
+                  </div>
+                  <button class="btn-favorite" onclick="toggleFavorite(this)" aria-label="Favorito"><svg class="bk-icon-sm icon-fav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+                  <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80" alt="Whopper Clásica">
+                  <span class="badge-coronas-earn">+25 coronas</span>
+                </div>
+                <div class="item-card-body">
+                  <h4>Whopper® Clásica</h4>
+                  <p>100% carne de res a la parrilla, crujiente lechuga, rodajas de tomate fresco, mayonesa y pepinillos...</p>
+                  <div class="item-card-action-row">
+                    <div class="price-block">
+                      <span class="price-lbl">Precio Individual</span>
+                      <strong class="price-num">S/ 22.90</strong>
+                    </div>
+                    <div class="buttons-block">
+                      <button class="btn-customize-pill" onclick="openCustomizer('Whopper® Clásica', 22.90, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80')">
+                        <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Personalizar</span>
+                      </button>
+                      <button class="btn-quick-add-plus" onclick="addToCartDirect('Whopper® Clásica', 22.90, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&auto=format&fit=crop&q=80', 'Carne a la parrilla, lechuga, tomate')">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2: Rodeo BBQ Burger -->
+              <div class="menu-item-card" data-category="res" data-tags="bbq">
+                <div class="item-card-image-wrap">
+                  <div class="item-badges-overlay">
+                    <span class="badge-flame"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg> A la parrilla</span>
+                    <span class="badge-best">Favorito BBQ</span>
+                  </div>
+                  <button class="btn-favorite" onclick="toggleFavorite(this)" aria-label="Favorito"><svg class="bk-icon-sm icon-fav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+                  <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=80" alt="Rodeo BBQ Burger">
+                  <span class="badge-coronas-earn">+28 coronas</span>
+                </div>
+                <div class="item-card-body">
+                  <h4>Rodeo BBQ Burger</h4>
+                  <p>Salsa BBQ dulce y ahumada con aros de cebolla crocantes y queso cheddar derretido al fuego...</p>
+                  <div class="item-card-action-row">
+                    <div class="price-block">
+                      <span class="price-lbl">Precio Individual</span>
+                      <strong class="price-num">S/ 26.50</strong>
+                    </div>
+                    <div class="buttons-block">
+                      <button class="btn-customize-pill" onclick="openCustomizer('Rodeo BBQ Burger', 26.50, 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=80')">
+                        <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Personalizar</span>
+                      </button>
+                      <button class="btn-quick-add-plus" onclick="addToCartDirect('Rodeo BBQ Burger', 26.50, 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=200&auto=format&fit=crop&q=80', 'Salsa BBQ ahumada, aros de cebolla')">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3: Stacker Doble Bacon -->
+              <div class="menu-item-card" data-category="res" data-tags="carnivore">
+                <div class="item-card-image-wrap">
+                  <div class="item-badges-overlay">
+                    <span class="badge-flame"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg> Doble Carne</span>
+                    <span class="badge-best">Ultra Carnívoro</span>
+                  </div>
+                  <button class="btn-favorite" onclick="toggleFavorite(this)" aria-label="Favorito"><svg class="bk-icon-sm icon-fav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+                  <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=600&auto=format&fit=crop&q=80" alt="Stacker Doble Bacon">
+                  <span class="badge-coronas-earn">+32 coronas</span>
+                </div>
+                <div class="item-card-body">
+                  <h4>Stacker Doble Bacon</h4>
+                  <p>2 carnes 100% de res a la parrilla, salsa Stacker exclusiva, abundante tocino crocante y queso fundido...</p>
+                  <div class="item-card-action-row">
+                    <div class="price-block">
+                      <span class="price-lbl">Precio Individual</span>
+                      <strong class="price-num">S/ 29.90</strong>
+                    </div>
+                    <div class="buttons-block">
+                      <button class="btn-customize-pill" onclick="openCustomizer('Stacker Doble Bacon', 29.90, 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=600&auto=format&fit=crop&q=80')">
+                        <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Personalizar</span>
+                      </button>
+                      <button class="btn-quick-add-plus" onclick="addToCartDirect('Stacker Doble Bacon', 29.90, 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=200&auto=format&fit=crop&q=80', 'Doble carne, salsa stacker, tocino')">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- In-Feed Upsell: Ahorra en Combo -->
+            <div class="upsell-combo-banner">
+              <div class="upsell-text">
+                <span class="upsell-tag">AHORRA EN COMBO</span>
+                <h4>¿Deseas papas medianas y gaseosa por S/ 4.90 más?</h4>
+                <p>Válido en la compra de cualquier Whopper individual.</p>
+              </div>
+              <button class="btn-add-combo-pill" onclick="quickAddComboUpgrade()">Añadir Combo</button>
+            </div>
+
+            <!-- Section: Plant-Based -->
+            <div class="catalog-section-header mt-lg">
+              <div>
+                <h3>Opciones Plant-Based</h3>
+                <p>Mismo sabor a la parrilla, 0% carne animal</p>
+              </div>
+              <span class="options-count-badge veggie-tag">VEGGIE</span>
+            </div>
+
+            <div class="menu-item-card" data-category="plant">
+              <div class="item-card-image-wrap">
+                <div class="item-badges-overlay">
+                  <span class="badge-veggie">100% Plant-Based</span>
+                  <span class="badge-best">Recomendado</span>
+                </div>
+                <button class="btn-favorite" onclick="toggleFavorite(this)" aria-label="Favorito"><svg class="bk-icon-sm icon-fav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+                <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?w=600&auto=format&fit=crop&q=80" alt="Whopper Vegetal">
+                <span class="badge-coronas-earn">+26 coronas</span>
+              </div>
+              <div class="item-card-body">
+                <h4>Whopper Vegetal</h4>
+                <p>El inconfundible sabor a la parrilla BK elaborado a base de plantas, con lechuga, tomate y mayonesa suave...</p>
+                <div class="item-card-action-row">
+                  <div class="price-block">
+                    <span class="price-lbl">Precio Individual</span>
+                    <strong class="price-num">S/ 23.90</strong>
+                  </div>
+                  <div class="buttons-block">
+                    <button class="btn-customize-pill" onclick="openCustomizer('Whopper Vegetal', 23.90, 'https://images.unsplash.com/photo-1520072959219-c595dc870360?w=600&auto=format&fit=crop&q=80')">
+                      <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Personalizar</span>
+                    </button>
+                    <button class="btn-quick-add-plus" onclick="addToCartDirect('Whopper Vegetal', 23.90, 'https://images.unsplash.com/photo-1520072959219-c595dc870360?w=200&auto=format&fit=crop&q=80', '100% plant-based sabor parrilla')">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              <!-- Item 6: King Pollo Deluxe -->
+              <div class="menu-item-card" data-category="pollo" data-tags="crispy">
+                <div class="item-card-image-wrap">
+                  <div class="item-badges-overlay">
+                    <span class="badge-cheese">100% Pechuga</span>
+                    <span class="badge-best">Extra Crujiente</span>
+                  </div>
+                  <button class="btn-favorite" onclick="toggleFavorite(this)" aria-label="Favorito"><svg class="bk-icon-sm icon-fav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+                  <img src="https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=600&auto=format&fit=crop&q=80" alt="King Pollo Deluxe">
+                  <span class="badge-coronas-earn">+24 coronas</span>
+                </div>
+                <div class="item-card-body">
+                  <h4>King Pollo Deluxe</h4>
+                  <p>Filete de pechuga de pollo extra crujiente, lechuga fresca picada, mayonesa cremosa y pan con ajonjolí tostado.</p>
+                  <div class="item-card-action-row">
+                    <div class="price-block">
+                      <span class="price-lbl">Precio Individual</span>
+                      <strong class="price-num">S/ 24.90</strong>
+                    </div>
+                    <div class="buttons-block">
+                      <button class="btn-customize-pill" onclick="openCustomizer('King Pollo Deluxe', 24.90, 'https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=600&auto=format&fit=crop&q=80')">
+                        <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Personalizar</span>
+                      </button>
+                      <button class="btn-quick-add-plus" onclick="addToCartDirect('King Pollo Deluxe', 24.90, 'https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=200&auto=format&fit=crop&q=80', 'Pechuga crujiente, mayonesa y lechuga')">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section: Snacks & Complementos -->
+            <div class="catalog-section-header mt-lg" id="snacksCatalogHeader">
+              <div>
+                <h3>Snacks & Complementos</h3>
+                <p>Crujientes, quesosos y perfectos para compartir</p>
+              </div>
+              <span class="options-count-badge">SNACKS</span>
+            </div>
+
+            <div class="menu-item-card" data-category="snacks" data-tags="veggie">
+              <div class="item-card-image-wrap">
+                <div class="item-badges-overlay">
+                  <span class="badge-cheese">Crujiente</span>
+                  <span class="badge-best">4 Unidades</span>
+                </div>
+                <button class="btn-favorite" onclick="toggleFavorite(this)" aria-label="Favorito"><svg class="bk-icon-sm icon-fav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+                <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=600&auto=format&fit=crop&q=80" alt="Mozzarella Sticks">
+                <span class="badge-coronas-earn">+12 coronas</span>
+              </div>
+              <div class="item-card-body">
+                <h4>Mozzarella Sticks (4 uds)</h4>
+                <p>Palitos de queso mozzarella empanizados y dorados a la perfección, acompañados de salsa marinara.</p>
+                <div class="item-card-action-row">
+                  <div class="price-block">
+                    <span class="price-lbl">Porción</span>
+                    <strong class="price-num">S/ 12.50</strong>
+                  </div>
+                  <div class="item-stepper-control">
+                    <button class="step-btn" onclick="quickMinusSide(this)">-</button>
+                    <span class="step-count">1</span>
+                    <button class="step-btn" onclick="quickPlusSide(this, 'Mozzarella Sticks (4 uds)', 12.50)">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Sticky Floating Cart Pill Bar -->
+        <div class="floating-cart-pill-bar" id="floatingCartBar" onclick="switchScreen('05-cart')">
+          <div class="floating-cart-left">
+            <span class="cart-bag-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+            <div class="floating-cart-details">
+              <strong>Mi Bandeja</strong>
+              <span class="floating-cart-sub" id="floatingCartText">S/ 52.80 • 2 ítems</span>
+            </div>
+          </div>
+          <button class="floating-cart-cta-btn">
+            <span>Ver Carrito</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav-bar">
+          <button class="bottom-tab-btn" data-nav-target="02-inicio" onclick="switchScreen('02-inicio')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="tab-txt">Inicio</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="03-menu" onclick="switchScreen('03-menu')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a1 1 0 0 0 1-1C20.5 5.5 16.5 3 12 3S3.5 5.5 3 10a1 1 0 0 0 1 1z"/><path d="M3 17h18a2 2 0 0 1 0 4H3a2 2 0 0 1 0-4z"/><path d="M4 14h16"/></svg></span>
+            <span class="tab-txt">Menú</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="09-coronas" onclick="switchScreen('09-coronas')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+            <span class="tab-txt">Coronas</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="08-cupones" onclick="switchScreen('08-cupones')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+            <span class="tab-txt">Cupones</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="07-tracker" onclick="switchScreen('07-tracker')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+            <span class="tab-txt">Pedidos</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="10-perfil" onclick="switchScreen('10-perfil')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span class="tab-txt">Yo</span>
+          </button>
+        </nav>
+      </section>
+
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 04: PERSONALIZAR WHOPPER "A TU MANERA"             -->
+      <!-- ========================================================= -->
+      <section class="screen-view" id="view-04-customizer" data-screen="04-customizer">
+        <header class="app-header">
+          <button class="nav-icon-btn" onclick="switchScreen('03-menu')" aria-label="Volver">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="header-brand-center">
+            <div class="bk-mini-logo">BK</div>
+            <h1 class="header-title" id="customizerHeaderTitle">Personalizar Whopper</h1>
+          </div>
+          <div class="header-right-actions">
+            <button class="nav-icon-btn" onclick="switchScreen('03-menu')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            <div class="user-avatar-circle" onclick="switchScreen('10-perfil')">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Camila">
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-sticky">
+          <!-- Hero Image & Quality Badge -->
+          <div class="customizer-hero-wrap">
+            <div class="hero-top-badge">
+              <span><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg> 100% CARNE VACUNA A LA PARRILLA</span>
+              <span>•</span>
+              <span>⭐ +229 Pts</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&auto=format&fit=crop&q=80" alt="Whopper Clásica" id="customizerHeroImg" class="customizer-hero-image">
+          </div>
+
+          <!-- Product Title, Description & Info Badges -->
+          <div class="customizer-info-block">
+            <div class="customizer-title-row">
+              <h2 id="customizerProductTitle">Whopper® Clásica</h2>
+              <span class="customizer-base-price" id="customizerBasePrice">S/ 22.90</span>
+            </div>
+            <p class="customizer-desc">
+              La reina de las hamburguesas. Deliciosa carne vacuna cocida a la parrilla, tomates frescos, lechuga crocante, mayonesa suave, pepinillos y cebolla blanca en pan tibio con ajonjolí.
+            </p>
+            <div class="customizer-meta-chips">
+              <span class="meta-chip">⏱ 8-12 min</span>
+              <span class="meta-chip"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg> 657 kcal</span>
+            </div>
+          </div>
+
+          <!-- Section 1: Tamaño de Hamburguesa (Radio selector) -->
+          <div class="customizer-section">
+            <div class="section-title-tag">
+              <h3>Tamaño de Hamburguesa</h3>
+              <span class="tag-mandatory">Obligatorio</span>
+            </div>
+            <div class="size-radio-grid">
+              <!-- Simple -->
+              <div class="size-radio-card active" onclick="selectPattySize('simple', 0, this)">
+                <div class="size-name">Simple</div>
+                <div class="size-sub">1 carne</div>
+                <span class="size-price-tag">Incluido</span>
+              </div>
+              <!-- Doble -->
+              <div class="size-radio-card" onclick="selectPattySize('doble', 6.50, this)">
+                <div class="size-name">Doble</div>
+                <div class="size-sub">2 carnes</div>
+                <span class="size-price-tag">+S/ 6.50</span>
+              </div>
+              <!-- Triple -->
+              <div class="size-radio-card" onclick="selectPattySize('triple', 11.50, this)">
+                <div class="size-name">Triple</div>
+                <div class="size-sub">3 carnes</div>
+                <span class="size-price-tag">+S/ 11.50</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: A Tu Manera® (Segmented Ingredients) -->
+          <div class="customizer-section">
+            <div class="section-title-tag">
+              <h3>A Tu Manera®</h3>
+              <span class="tag-bk-custom">Personalización BK</span>
+            </div>
+
+            <!-- Ingredient 1: Pepinillos -->
+            <div class="ingredient-row">
+              <div class="ingredient-header">
+                <span class="ing-name">Pepinillos agridulces</span>
+                <span class="ing-current" id="lbl-pepinillos">Normal</span>
+              </div>
+              <div class="segmented-ing-toggle" data-ing="pepinillos">
+                <button class="seg-btn" onclick="setIngredientLevel('pepinillos', 'Sin pepinillo', 0, this)">Sin pepinillo</button>
+                <button class="seg-btn active" onclick="setIngredientLevel('pepinillos', 'Normal', 0, this)">Normal</button>
+                <button class="seg-btn" onclick="setIngredientLevel('pepinillos', 'Extra', 1.00, this)">Extra (+S/ 1.00)</button>
+              </div>
+            </div>
+
+            <!-- Ingredient 2: Cebolla -->
+            <div class="ingredient-row">
+              <div class="ingredient-header">
+                <span class="ing-name">Cebolla blanca fresca</span>
+                <span class="ing-current" id="lbl-cebolla">Normal</span>
+              </div>
+              <div class="segmented-ing-toggle" data-ing="cebolla">
+                <button class="seg-btn" onclick="setIngredientLevel('cebolla', 'Sin cebolla', 0, this)">Sin cebolla</button>
+                <button class="seg-btn active" onclick="setIngredientLevel('cebolla', 'Normal', 0, this)">Normal</button>
+                <button class="seg-btn" onclick="setIngredientLevel('cebolla', 'Extra', 0, this)">Extra (Gratis)</button>
+              </div>
+            </div>
+
+            <!-- Ingredient 3: Tomate -->
+            <div class="ingredient-row">
+              <div class="ingredient-header">
+                <span class="ing-name">Tomate en rodajas</span>
+                <span class="ing-current" id="lbl-tomate">Normal</span>
+              </div>
+              <div class="segmented-ing-toggle" data-ing="tomate">
+                <button class="seg-btn" onclick="setIngredientLevel('tomate', 'Sin tomate', 0, this)">Sin tomate</button>
+                <button class="seg-btn active" onclick="setIngredientLevel('tomate', 'Normal', 0, this)">Normal</button>
+                <button class="seg-btn" onclick="setIngredientLevel('tomate', 'Extra', 1.50, this)">Extra (+S/ 1.50)</button>
+              </div>
+            </div>
+
+            <!-- Ingredient 4: Salsa BBQ -->
+            <div class="ingredient-row">
+              <div class="ingredient-header">
+                <span class="ing-name">Salsa BBQ Ahumada</span>
+                <span class="ing-current" id="lbl-bbq">Ninguna</span>
+              </div>
+              <div class="segmented-ing-toggle" data-ing="bbq">
+                <button class="seg-btn active" onclick="setIngredientLevel('bbq', 'Ninguna', 0, this)">Ninguna</button>
+                <button class="seg-btn" onclick="setIngredientLevel('bbq', 'Normal', 0, this)">Normal</button>
+                <button class="seg-btn" onclick="setIngredientLevel('bbq', 'Extra', 1.50, this)">Extra (+S/ 1.50)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Adicionales con Stepper -->
+          <div class="customizer-section">
+            <div class="section-title-tag">
+              <h3>Adicionales</h3>
+            </div>
+
+            <!-- Queso -->
+            <div class="addon-stepper-row">
+              <div class="addon-info">
+                <span class="addon-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 14l9-9 9 9v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5z"/><circle cx="9" cy="15" r="1"/><circle cx="14" cy="13" r="1.5"/></svg></span>
+                <div>
+                  <strong>Queso Americano fundido</strong>
+                  <span class="addon-price">+S/ 2.50 porción</span>
+                </div>
+              </div>
+              <div class="stepper-box">
+                <button class="step-btn" onclick="changeAddon('cheese', -1)">-</button>
+                <span class="step-qty" id="qtyCheese">0</span>
+                <button class="step-btn" onclick="changeAddon('cheese', 1)">+</button>
+              </div>
+            </div>
+
+            <!-- Tocino -->
+            <div class="addon-stepper-row">
+              <div class="addon-info">
+                <span class="addon-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9c3-3 6 3 9 0s6-3 9 0"/><path d="M2 15c3-3 6 3 9 0s6-3 9 0"/></svg></span>
+                <div>
+                  <strong>Tocino crocante ahumado</strong>
+                  <span class="addon-price">+S/ 3.50 porción</span>
+                </div>
+              </div>
+              <div class="stepper-box">
+                <button class="step-btn" onclick="changeAddon('bacon', -1)">-</button>
+                <span class="step-qty" id="qtyBacon">0</span>
+                <button class="step-btn" onclick="changeAddon('bacon', 1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Upsell Combo Switch -->
+          <div class="combo-upsell-toggle-card">
+            <div class="combo-upsell-left">
+              <span class="combo-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 2h10l-1.5 18a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2L7 2z"/><line x1="6" y1="6" x2="18" y2="6"/></svg></span>
+              <div>
+                <strong>¿Agrandar a Combo?</strong>
+                <p>Papas fritas + Bebida (+S/ 8.00)</p>
+              </div>
+            </div>
+            <label class="switch-control">
+              <input type="checkbox" id="chkComboUpsell" onchange="toggleComboUpsell(this.checked)">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <!-- Section 5: Instrucciones Especiales -->
+          <div class="customizer-section">
+            <div class="section-title-tag">
+              <h3>Instrucciones Especiales</h3>
+            </div>
+            <p class="inst-label">¿Alguna preferencia con la parrilla o empaque?</p>
+            <textarea class="instructions-textarea" id="customInstructions" placeholder="Ej: Hamburguesa bien cocida, servilletas extra, cortar en 2..."></textarea>
+          </div>
+        </div>
+
+        <!-- Sticky Bottom Action Bar with Dynamic Pricing -->
+        <div class="sticky-action-bar">
+          <div class="stepper-box-large">
+            <button class="step-btn-lg" onclick="changeCustomQty(-1)">-</button>
+            <span class="step-qty-lg" id="customQty">1</span>
+            <button class="step-btn-lg" onclick="changeCustomQty(1)">+</button>
+          </div>
+          <button class="btn-primary-flame flex-1" onclick="commitCustomizationToCart()">
+            <span class="btn-text">Agregar a la Bandeja</span>
+            <span class="btn-total-dynamic" id="customFinalTotal">S/ 22.90</span>
+          </button>
+        </div>
+      </section>
+
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 05: CARRITO DE CORONAS (/cart)                     -->
+      <!-- ========================================================= -->
+      <section class="screen-view" id="view-05-cart" data-screen="05-cart">
+        <header class="app-header">
+          <button class="nav-icon-btn" onclick="switchScreen('03-menu')" aria-label="Atrás">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="header-brand-center">
+            <div class="bk-mini-logo">BK</div>
+            <h1 class="header-title">Carrito</h1>
+          </div>
+          <div class="header-right-actions">
+            <button class="nav-icon-btn" onclick="switchScreen('03-menu')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            <div class="user-avatar-circle" onclick="switchScreen('10-perfil')">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Camila">
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-sticky">
+          <!-- Preparation Status Banner -->
+          <div class="prep-status-banner">
+            <div class="prep-left">
+              <span class="prep-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><path d="M15 6h2"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
+              <div>
+                <span class="prep-tag">• PEDIDO EN PREPARACIÓN</span>
+                <strong class="prep-time">Llegada en 30-40 min</strong>
+                <span class="prep-address">Av. Benavides 402, Miraflores</span>
+              </div>
+            </div>
+            <button class="btn-edit-address" onclick="openEditAddressModal()"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          </div>
+
+          <!-- Cart Items Section -->
+          <div class="cart-items-section">
+            <div class="cart-section-header">
+              <div class="cart-title-row">
+                <h3>Tu Bandeja</h3>
+                <span class="cart-items-badge" id="cartBadgeCount">3 items</span>
+              </div>
+              <button class="btn-add-more-link" onclick="switchScreen('03-menu')"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a1 1 0 0 0 1-1C20.5 5.5 16.5 3 12 3S3.5 5.5 3 10a1 1 0 0 0 1 1z"/><path d="M3 17h18a2 2 0 0 1 0 4H3a2 2 0 0 1 0-4z"/><path d="M4 14h16"/></svg> Añadir más</button>
+            </div>
+
+            <!-- Dynamic Cart Items Container -->
+            <div class="cart-list" id="cartListContainer">
+              <!-- Item 1: Whopper Personalizado -->
+              <div class="cart-item-row" id="cart-item-1">
+                <div class="cart-thumb-wrap">
+                  <span class="qty-bubble">1x</span>
+                  <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&auto=format&fit=crop&q=80" alt="Whopper">
+                </div>
+                <div class="cart-item-info">
+                  <div class="cart-item-title-row">
+                    <h4>Whopper® Person...</h4>
+                    <span class="cart-item-price">S/ 30.90</span>
+                  </div>
+                  <p class="cart-item-sub">Doble carne, sin cebolla, tocino extra, Papas mediana...</p>
+                  <span class="badge-customized"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Personalizado</span>
+                  <div class="cart-item-actions-row">
+                    <div class="stepper-box-mini">
+                      <button class="step-btn-mini" onclick="updateCartItemQty(1, -1)">-</button>
+                      <span class="step-qty-mini" id="cart-qty-1">1</span>
+                      <button class="step-btn-mini" onclick="updateCartItemQty(1, 1)">+</button>
+                    </div>
+                    <div class="cart-item-links">
+                      <button class="btn-text-link" onclick="switchScreen('04-customizer')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar</button>
+                      <span>•</span>
+                      <button class="btn-trash-icon" onclick="removeCartItem(1)" aria-label="Eliminar"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2: Stacker Doble -->
+              <div class="cart-item-row" id="cart-item-2">
+                <div class="cart-thumb-wrap">
+                  <span class="qty-bubble">1x</span>
+                  <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=200&auto=format&fit=crop&q=80" alt="Stacker Doble">
+                </div>
+                <div class="cart-item-info">
+                  <div class="cart-item-title-row">
+                    <h4>Stacker® Doble</h4>
+                    <span class="cart-item-price">S/ 29.90</span>
+                  </div>
+                  <p class="cart-item-sub">Con queso cheddar fundido y salsa stacker original</p>
+                  <div class="cart-item-actions-row">
+                    <div class="stepper-box-mini">
+                      <button class="step-btn-mini" onclick="updateCartItemQty(2, -1)">-</button>
+                      <span class="step-qty-mini" id="cart-qty-2">1</span>
+                      <button class="step-btn-mini" onclick="updateCartItemQty(2, 1)">+</button>
+                    </div>
+                    <div class="cart-item-links">
+                      <button class="btn-trash-icon" onclick="removeCartItem(2)" aria-label="Eliminar"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3: Aros de Cebolla -->
+              <div class="cart-item-row" id="cart-item-3">
+                <div class="cart-thumb-wrap">
+                  <span class="qty-bubble">1x</span>
+                  <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=200&auto=format&fit=crop&q=80" alt="Aros de Cebolla">
+                </div>
+                <div class="cart-item-info">
+                  <div class="cart-item-title-row">
+                    <h4>Aros de Cebolla Gra...</h4>
+                    <span class="cart-item-price">S/ 11.90</span>
+                  </div>
+                  <p class="cart-item-sub">Porción grande con dip de salsa BBQ ahumada</p>
+                  <div class="cart-item-actions-row">
+                    <div class="stepper-box-mini">
+                      <button class="step-btn-mini" onclick="updateCartItemQty(3, -1)">-</button>
+                      <span class="step-qty-mini" id="cart-qty-3">1</span>
+                      <button class="step-btn-mini" onclick="updateCartItemQty(3, 1)">+</button>
+                    </div>
+                    <div class="cart-item-links">
+                      <button class="btn-trash-icon" onclick="removeCartItem(3)" aria-label="Eliminar"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cross-Sell Carousel: Sweet Extras -->
+          <div class="cross-sell-section">
+            <h4 class="cross-sell-title"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4c0 .7.2 1.4.5 2H4a2 2 0 0 0-2 2v2h20v-2a2 2 0 0 0-2-2h-4.5c.3-.6.5-1.3.5-2a4 4 0 0 0-4-4z"/><path d="M3 14v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/></svg> Agrégale el toque dulce a tu pedido</h4>
+            <div class="cross-sell-scroll-row">
+              <!-- Sundae -->
+              <div class="cross-sell-card">
+                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=160&auto=format&fit=crop&q=80" alt="Sundae">
+                <div class="cross-sell-info">
+                  <strong>Sundae Choc...</strong>
+                  <span>Caliente y cremoso</span>
+                  <div class="cross-sell-bottom">
+                    <span class="add-price">+S/ 5.90</span>
+                    <button class="btn-add-mini-plus" onclick="addToCartDirect('Sundae Chocolate', 5.90, 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=160&auto=format&fit=crop&q=80', 'Helado de vainilla con chocolate caliente')">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pie de Manzana -->
+              <div class="cross-sell-card">
+                <img src="https://images.unsplash.com/photo-1535920527002-b35e96722eb9?w=160&auto=format&fit=crop&q=80" alt="Pie de Manzana">
+                <div class="cross-sell-info">
+                  <strong>Pie de Manzana</strong>
+                  <span>Crujiente y dulce</span>
+                  <div class="cross-sell-bottom">
+                    <span class="add-price">+S/ 6.50</span>
+                    <button class="btn-add-mini-plus" onclick="addToCartDirect('Pie de Manzana Caliente', 6.50, 'https://images.unsplash.com/photo-1535920527002-b35e96722eb9?w=160&auto=format&fit=crop&q=80', 'Masa hojaldre crujiente con manzanas')">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coupon Card -->
+          <div class="coupon-applied-card">
+            <div class="coupon-header">
+              <span class="coupon-icon-label"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> CUPÓN DE DESCUENTO</span>
+              <span class="coupon-status-tag" id="couponStatusTag">1 aplicado</span>
+            </div>
+            <div class="coupon-details-box" id="couponBox">
+              <div class="coupon-left">
+                <span class="check-circle-red"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <div>
+                  <strong class="coupon-code">BKBIENVENIDO20</strong>
+                  <span class="coupon-discount">-20% OFF (-S/ 14.54)</span>
+                </div>
+              </div>
+              <button class="btn-remove-coupon" onclick="removeCoupon()" title="Quitar cupón">ⓧ</button>
+            </div>
+          </div>
+
+          <!-- Loyalty Switch Card: 100 Coronas BK = Free Delivery -->
+          <div class="loyalty-switch-card">
+            <div class="loyalty-left">
+              <span class="loyalty-crown-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+              <div>
+                <div class="loyalty-title-row">
+                  <strong>Usar 100 Coronas BK</strong>
+                  <span class="coronas-avail-pill">140 disp.</span>
+                </div>
+                <span class="loyalty-sub">Envío 100% gratis (-S/ 6.00)</span>
+              </div>
+            </div>
+            <label class="switch-control">
+              <input type="checkbox" id="chkUseCoronasShipping" checked onchange="toggleCoronasShipping(this.checked)">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <!-- Order Summary Breakdown -->
+          <div class="order-summary-card">
+            <h4 class="summary-title">Resumen del pedido</h4>
+            <div class="summary-line">
+              <span>Subtotal</span>
+              <span id="cartSubtotal">S/ 72.70</span>
+            </div>
+            <div class="summary-line text-discount">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Descuento cupón</span>
+              <span id="cartDiscount">-S/ 14.54</span>
+            </div>
+            <div class="summary-line">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><path d="M15 6h2"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg> Costo de envío</span>
+              <div class="shipping-value" id="cartShipping">
+                <span class="old-price">S/ 6.00</span>
+                <strong class="text-free">GRATIS</strong>
+              </div>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-line total-line">
+              <div>
+                <strong>Total a Pagar</strong>
+                <span class="igv-caption">IGV incluido (18%)</span>
+              </div>
+              <strong class="total-amount" id="cartFinalTotal">S/ 58.16</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky Bottom Checkout Bar -->
+        <div class="sticky-action-bar flex-col">
+          <div class="checkout-assurance-row">
+            <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Pago seguro BK Perú</span>
+            <span class="savings-text">Ahorraste S/ 20.54 hoy</span>
+          </div>
+          <button class="btn-primary-flame w-full" onclick="switchScreen('06-checkout')">
+            <span class="btn-text">Continuar al Pago</span>
+            <span class="btn-total-dynamic" id="cartStickyTotal">S/ 58.16 <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </button>
+        </div>
+      </section>
+
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 06: CHECKOUT Y PAGOS PERÚ (/checkout)              -->
+      <!-- ========================================================= -->
+      <section class="screen-view" id="view-06-checkout" data-screen="06-checkout">
+        <header class="app-header">
+          <button class="nav-icon-btn" onclick="switchScreen('05-cart')" aria-label="Atrás">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="header-brand-center">
+            <div class="bk-mini-logo">BK</div>
+            <h1 class="header-title">Checkout</h1>
+          </div>
+          <div class="header-right-actions">
+            <button class="nav-icon-btn" onclick="switchScreen('03-menu')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            <div class="user-avatar-circle" onclick="switchScreen('10-perfil')">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Camila">
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-sticky">
+          <!-- Club BK Rewards Bar -->
+          <div class="checkout-rewards-card">
+            <div class="rewards-card-left">
+              <span class="gold-trophy-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></span>
+              <div>
+                <strong>Club BK Rewards</strong>
+                <p>Tienes <strong>240 Coronas</strong> acumuladas</p>
+              </div>
+            </div>
+            <label class="switch-control">
+              <input type="checkbox" id="chkUseCheckoutRewards" onchange="toggleCheckoutRewards(this.checked)">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <!-- Section 1: Entrega Confirmada -->
+          <div class="checkout-card">
+            <div class="checkout-card-header">
+              <div class="header-title-pin">
+                <span class="pin-red"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <strong>Entrega Confirmada</strong>
+              </div>
+              <button class="btn-link-action" onclick="openEditAddressModal()">Cambiar <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+            </div>
+
+            <!-- Mini Map Preview Card -->
+            <div class="address-preview-box">
+              <div class="mini-map-static">
+                <div class="mini-map-pin"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              </div>
+              <div class="address-preview-text">
+                <div class="eta-live-tag">
+                  <span class="dot-red-pulse"></span>
+                  <span>Llegada est. 25-35 min</span>
+                </div>
+                <strong class="street-name">Av. Alfredo Benavides 402</strong>
+                <span class="apt-name">Dpto 501 • Miraflores, Lima</span>
+                <span class="safe-zone-tag"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Zona de cobertura segura</span>
+              </div>
+            </div>
+
+            <div class="delivery-instructions-box">
+              <span class="note-icon"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
+              <p>Dejar en portería con el Sr. Juan... <a href="javascript:void(0)" onclick="openEditAddressModal()">Editar</a></p>
+            </div>
+          </div>
+
+          <!-- Section 2: Métodos de Pago Perú -->
+          <div class="checkout-card">
+            <div class="checkout-card-header">
+              <div class="header-title-pin">
+                <span class="payment-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+                <strong>Método de Pago</strong>
+              </div>
+              <span class="badge-peru-instant">Perú Instantáneo</span>
+            </div>
+
+            <div class="payment-methods-list">
+              <!-- Option 1: Yape / Plin -->
+              <label class="payment-method-row">
+                <div class="method-left">
+                  <div class="method-icon-box qr-bg">
+                    <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
+                  </div>
+                  <div class="method-info">
+                    <div class="method-title-badge">
+                      <strong>Yape / Plin</strong>
+                      <span class="badge-fastest">¡Más Rápido!</span>
+                    </div>
+                    <span class="method-sub">Sin comisiones, confirmación al toque</span>
+                  </div>
+                </div>
+                <input type="radio" name="paymentMethod" value="yape" onchange="selectPaymentMethod('yape')">
+              </label>
+
+              <!-- Option 2: BCP Débito (Checked) -->
+              <label class="payment-method-row active">
+                <div class="method-left">
+                  <div class="method-icon-box bcp-bg">
+                    <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+                  </div>
+                  <div class="method-info">
+                    <div class="method-title-badge">
+                      <strong>BCP Débito Visa</strong>
+                      <span class="card-digits">•••• 4821</span>
+                    </div>
+                    <span class="method-sub">Expira 09/27 • Tarjeta predilecta</span>
+                  </div>
+                </div>
+                <input type="radio" name="paymentMethod" value="bcp" checked onchange="selectPaymentMethod('bcp')">
+              </label>
+              <div class="add-new-card-link" onclick="openAddCardModal()">
+                <span>+ Agregar nueva tarjeta</span>
+              </div>
+
+              <!-- Option 3: Pago contra entrega -->
+              <label class="payment-method-row">
+                <div class="method-left">
+                  <div class="method-icon-box cash-bg">
+                    <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg></span>
+                  </div>
+                  <div class="method-info">
+                    <strong>Pago contra entrega</strong>
+                    <span class="method-sub">Efectivo o POS inalámbrico</span>
+                  </div>
+                </div>
+                <input type="radio" name="paymentMethod" value="cash" onchange="selectPaymentMethod('cash')">
+              </label>
+            </div>
+          </div>
+
+          <!-- Section 3: Comprobante SUNAT -->
+          <div class="checkout-card">
+            <div class="checkout-card-header">
+              <div class="header-title-pin">
+                <span class="invoice-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                <strong>Comprobante Electrónico</strong>
+              </div>
+            </div>
+
+            <!-- Segmented Boleta / Factura -->
+            <div class="segmented-invoice-tabs">
+              <button class="invoice-tab-btn active" id="tabBoleta" onclick="toggleInvoiceType('boleta')">Boleta de Venta</button>
+              <button class="invoice-tab-btn" id="tabFactura" onclick="toggleInvoiceType('factura')">Factura (con RUC)</button>
+            </div>
+
+            <div class="invoice-input-field">
+              <label class="field-label" id="lblDocType">DNI (Opcional para boletas menores a S/ 700)</label>
+              <input type="text" class="bk-input" id="docNumberInput" value="72849103" placeholder="Ingresa DNI o RUC">
+            </div>
+          </div>
+
+          <!-- Section 4: Resumen del Pedido SUNAT Breakdown -->
+          <div class="checkout-card">
+            <h4 class="summary-title">Resumen del Pedido</h4>
+            <div class="summary-line">
+              <span id="checkoutSubtotalLabel">Subtotal productos</span>
+              <span id="checkoutSubtotalVal">S/ 48.90</span>
+            </div>
+            <div class="summary-line">
+              <span>Costo de envío (Miraflores Express)</span>
+              <span>S/ 4.50</span>
+            </div>
+            <div class="summary-line">
+              <span>IGV (18% Incluido)</span>
+              <span id="checkoutIgvVal">S/ 8.87</span>
+            </div>
+            <div class="summary-line">
+              <span>Tasa de empaque biodegradable</span>
+              <span>S/ 0.80</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-line total-line">
+              <div>
+                <strong>TOTAL A PAGAR</strong>
+                <span class="igv-caption">Incluye boleta de venta</span>
+              </div>
+              <strong class="total-amount highlight-red" id="checkoutFinalTotal">S/ 58.16</strong>
+            </div>
+          </div>
+
+          <!-- Flame Guarantee Badge -->
+          <div class="guarantee-message-box">
+            <span class="flame-icon"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg></span>
+            <span><strong>Garantía Flame & Crave:</strong> Caliente o te enviamos otro gratis.</span>
+          </div>
+        </div>
+
+        <!-- Sticky Confirm Order CTA -->
+        <div class="sticky-action-bar flex-col">
+          <button class="btn-primary-flame w-full" id="btnPlaceOrder" onclick="processOrderToTracker()">
+            <span class="btn-text">Confirmar y Pedir</span>
+            <span class="btn-total-dynamic" id="checkoutBtnTotal">S/ 58.16 <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </button>
+          <div class="checkout-encryption-note">
+            <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Transacción 100% encriptada y protegida</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 07: SEGUIMIENTO EN VIVO (KING TRACKER)             -->
+      <!-- ========================================================= -->
+      <section class="screen-view" id="view-07-tracker" data-screen="07-tracker">
+        <header class="app-header">
+          <button class="nav-icon-btn" onclick="switchScreen('02-inicio')" aria-label="Inicio">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="header-brand-center">
+            <div class="bk-mini-logo">BK</div>
+            <h1 class="header-title">King Tracker</h1>
+          </div>
+          <div class="header-right-actions">
+            <button class="nav-icon-btn" onclick="switchScreen('02-inicio')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            <div class="user-avatar-circle" onclick="switchScreen('10-perfil')">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Camila">
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-normal">
+          <!-- Flame Status Card -->
+          <div class="tracker-status-card">
+            <div class="tracker-badges-row">
+              <span class="pill-order-id">Pedido #BK-84920</span>
+              <span class="pill-branch-name">BK Benavides</span>
+            </div>
+            <h2 class="tracker-main-heading">¡En camino a tu ubicación!</h2>
+            <p class="tracker-main-sub">Tu banquete a la parrilla está rodando directo a Miraflores.</p>
+
+            <div class="tracker-eta-box">
+              <div class="eta-title-row">
+                <span class="eta-lbl">TIEMPO ESTIMADO DE LLEGADA</span>
+                <strong class="eta-minutes" id="trackerEtaTime">18 - 22 min</strong>
+              </div>
+              <div class="tracker-progress-track">
+                <div class="track-fill-bar" style="width: 68%;"></div>
+              </div>
+              <div class="tracker-time-bounds">
+                <span>Salida: 14:32</span>
+                <span>ETA: 14:52</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real Interactive Leaflet Map for Miraflores, Lima -->
+          <div class="tracker-map-wrapper">
+            <div id="kingTrackerMap" class="leaflet-map-container"></div>
+            <!-- Floating overlay chips on map -->
+            <div class="map-chip-store">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a1 1 0 0 0 1-1C20.5 5.5 16.5 3 12 3S3.5 5.5 3 10a1 1 0 0 0 1 1z"/><path d="M3 17h18a2 2 0 0 1 0 4H3a2 2 0 0 1 0-4z"/><path d="M4 14h16"/></svg> Burger King Benavides</span>
+            </div>
+            <div class="map-chip-rider">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><path d="M15 6h2"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg> Carlos está a 1.2 km</span>
+            </div>
+            <div class="map-chip-destination">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Calle Schell 385, Miraflores</span>
+            </div>
+          </div>
+
+          <!-- Driver Profile Card -->
+          <div class="driver-card">
+            <div class="driver-info-left">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&auto=format&fit=crop&q=80" alt="Carlos Mendoza" class="driver-avatar">
+              <div class="driver-details">
+                <div class="driver-name-row">
+                  <strong>Carlos Mendoza</strong>
+                  <span class="flag-pe">🇵🇪</span>
+                </div>
+                <div class="driver-rating-bike">
+                  <span class="driver-rating">⭐ 4.9</span>
+                  <span>• Motocicleta Honda 150</span>
+                </div>
+              </div>
+            </div>
+            <div class="driver-action-buttons">
+              <button class="btn-driver-call" onclick="triggerCallDriver()">
+                <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Llamar</span>
+              </button>
+              <button class="btn-driver-whatsapp" onclick="triggerWhatsAppDriver()">
+                <span><svg class="bk-icon icon-whatsapp" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg> Chat WhatsApp</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stepper: 5 Estados del Pedido (Live) -->
+          <div class="order-stepper-card">
+            <div class="stepper-header-row">
+              <h3>Estado del Pedido</h3>
+              <span class="badge-live-pulse">
+                <span class="pulse-dot"></span>
+                <span>EN VIVO</span>
+              </span>
+            </div>
+
+            <div class="stepper-timeline">
+              <!-- Step 1: Confirmado -->
+              <div class="step-item completed">
+                <div class="step-indicator">
+                  <span class="step-icon"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <div class="step-line"></div>
+                </div>
+                <div class="step-text">
+                  <div class="step-title-time">
+                    <strong>Pedido Recibido y Confirmado</strong>
+                    <span class="step-timestamp">14:15</span>
+                  </div>
+                  <p>La orden ingresó al sistema del local Benavides.</p>
+                </div>
+              </div>
+
+              <!-- Step 2: A la parrilla -->
+              <div class="step-item completed">
+                <div class="step-indicator">
+                  <span class="step-icon"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg></span>
+                  <div class="step-line"></div>
+                </div>
+                <div class="step-text">
+                  <div class="step-title-time">
+                    <strong>A la Parrilla con Amor</strong>
+                    <span class="step-timestamp">14:21</span>
+                  </div>
+                  <p>Carne 100% vacuna cocinada a fuego directo BK.</p>
+                </div>
+              </div>
+
+              <!-- Step 3: Empacado -->
+              <div class="step-item completed">
+                <div class="step-indicator">
+                  <span class="step-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>
+                  <div class="step-line"></div>
+                </div>
+                <div class="step-text">
+                  <div class="step-title-time">
+                    <strong>Empacado y Sellado</strong>
+                    <span class="step-timestamp">14:28</span>
+                  </div>
+                  <p>Bolsa sellada con sello térmico de seguridad King.</p>
+                </div>
+              </div>
+
+              <!-- Step 4: En camino (Active) -->
+              <div class="step-item current">
+                <div class="step-indicator">
+                  <span class="step-icon pulse"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><path d="M15 6h2"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
+                  <div class="step-line pending"></div>
+                </div>
+                <div class="step-text">
+                  <div class="step-title-time">
+                    <strong class="highlight-flame">Repartidor en Camino</strong>
+                    <span class="badge-in-progress">En curso</span>
+                  </div>
+                  <p>Carlos se encuentra a pocas cuadras de tu dirección.</p>
+                </div>
+              </div>
+
+              <!-- Step 5: Entregado -->
+              <div class="step-item pending">
+                <div class="step-indicator">
+                  <span class="step-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2v20M2 2v8a4 4 0 0 0 4 4v8M6 2v6"/></svg></span>
+                </div>
+                <div class="step-text">
+                  <div class="step-title-time">
+                    <strong>Entregado y ¡A disfrutar!</strong>
+                    <span class="step-timestamp text-muted">Pendiente</span>
+                  </div>
+                  <p>Momento de coronar el hambre con sabor a la parrilla.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Content Summary Accordion -->
+          <div class="order-summary-accordion">
+            <div class="accordion-header" onclick="toggleOrderAccordion()">
+              <div class="acc-left">
+                <span class="package-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>
+                <div>
+                  <strong>Resumen de contenido (3 ítems)</strong>
+                </div>
+              </div>
+              <strong class="acc-total">S/ 48.90</strong>
+            </div>
+            <div class="accordion-body" id="orderAccordionBody">
+              <p>1x Combo Whopper Doble con Queso, 1x Papas King Medianas, 1x Coca-Cola Sin Azúcar</p>
+            </div>
+          </div>
+
+          <!-- Quick Action Links -->
+          <div class="tracker-footer-links">
+            <button class="footer-link-btn" onclick="openOrderReceiptModal()">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Ver detalles de la orden</span>
+            </button>
+            <button class="footer-link-btn" onclick="openSupportModal()">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg> Centro de Ayuda y Soporte BK</span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="bottom-nav-bar">
+          <button class="bottom-tab-btn" data-nav-target="02-inicio" onclick="switchScreen('02-inicio')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="tab-txt">Inicio</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="03-menu" onclick="switchScreen('03-menu')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a1 1 0 0 0 1-1C20.5 5.5 16.5 3 12 3S3.5 5.5 3 10a1 1 0 0 0 1 1z"/><path d="M3 17h18a2 2 0 0 1 0 4H3a2 2 0 0 1 0-4z"/><path d="M4 14h16"/></svg></span>
+            <span class="tab-txt">Menú</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="09-coronas" onclick="switchScreen('09-coronas')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+            <span class="tab-txt">Coronas</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="08-cupones" onclick="switchScreen('08-cupones')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+            <span class="tab-txt">Cupones</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="07-tracker" onclick="switchScreen('07-tracker')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+            <span class="tab-txt">Pedidos</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="10-perfil" onclick="switchScreen('10-perfil')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span class="tab-txt">Yo</span>
+          </button>
+        </nav>
+      </section>
+
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 08: CUPONES Y PROMOCIONES (/cupons)                -->
+      <!-- ========================================================= -->
+      <section class="screen-view" id="view-08-cupones" data-screen="08-cupones">
+        <header class="app-header">
+          <div class="header-brand-left" onclick="switchScreen('02-inicio')" style="cursor:pointer;">
+            <div class="bk-mini-logo">BK</div>
+            <div class="brand-text-col">
+              <span class="brand-country">PERÚ</span>
+              <strong class="brand-page-title">Cupones</strong>
+            </div>
+          </div>
+          <div class="header-right-actions">
+            <div class="coronas-coin-pill" onclick="switchScreen('09-coronas')" title="Tus Coronas BK">
+              <span class="coin-symbol"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+              <span class="coin-val">450</span>
+            </div>
+            <div class="header-cart-icon-btn" onclick="switchScreen('05-cart')" title="Ver Carrito">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+              <span class="cart-badge-pill">3</span>
+            </div>
+            <div class="user-avatar-circle" onclick="switchScreen('10-perfil')" title="Mi Cuenta">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Camila">
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-normal">
+          <!-- Exclusive First Buy Hero Card -->
+          <div class="coupon-hero-banner flame-gradient-bg">
+            <div class="badge-exclusive-tag">⭐ EXCLUSIVO PRIMERA COMPRA</div>
+            <h2 class="coupon-hero-title">¡20% de descuento en tu primera compra móvil!</h2>
+            <p class="coupon-hero-sub">Pide desde la app, ahorra tiempo y disfruta el sabor a la parrilla recién hecho.</p>
+
+            <div class="coupon-ticket-box">
+              <div class="ticket-code-row">
+                <span class="ticket-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+                <span class="ticket-code-str">BKBIENVENIDO20</span>
+              </div>
+              <button class="btn-ticket-apply" onclick="applyCouponCode('BKBIENVENIDO20')">Aplicar Cupón <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Viral Rewards Card -->
+          <div class="viral-rewards-card">
+            <div class="viral-badge-row">
+              <span class="viral-tag"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg> VIRAL REWARDS</span>
+              <span class="viral-points">+150 Coronas</span>
+            </div>
+            <h3 class="viral-title">Regala sabor a la parrilla</h3>
+            <p class="viral-desc">
+              Comparte un link por WhatsApp: tu amigo recibe <strong>20% OFF</strong> en su debut y tú ganas <strong>150 Coronas</strong> automáticamente tras su primer bocado.
+            </p>
+            <div class="viral-button-row">
+              <button class="btn-share-whatsapp" onclick="shareCouponWhatsApp()">
+                <span class="wa-icon"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+                <span>Compartir en WhatsApp</span>
+              </button>
+              <button class="btn-copy-link" onclick="copyReferralLink()" title="Copiar Enlace">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Coupons Segmented Bar -->
+          <div class="cuponera-tabs-header">
+            <div class="cuponera-title-row">
+              <strong>Cuponeras Activas</strong>
+              <span class="renew-timestamp">⏱ Renuevan en 3d</span>
+            </div>
+            <div class="cuponera-filter-pills">
+              <button class="coupon-pill-btn active" onclick="filterCouponCategory('para-ti', this)"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg> Para Ti (Personalizados)</button>
+              <button class="coupon-pill-btn" onclick="filterCouponCategory('2x1', this)">⭐ 2x1 Favoritos</button>
+            </div>
+          </div>
+
+          <!-- Coupons Grid / List -->
+          <div class="coupons-grid-list">
+            <!-- Coupon 1: 2 Whopper Jr. + 2 Papas -->
+            <div class="coupon-card">
+              <div class="coupon-card-media">
+                <span class="coupon-badge-top-left"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> AHORRAS 30%</span>
+                <span class="coupon-badge-top-right">⭐ Ganas 60 Coronas</span>
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&auto=format&fit=crop&q=80" alt="2 Whopper Jr.">
+              </div>
+              <div class="coupon-card-body">
+                <h4>2 Whopper® Jr. + 2 Papas Regulares</h4>
+                <p>Carne 100% vacuna a la parrilla, pepinillos crujientes y papas doradas en corte...</p>
+                <div class="coupon-card-footer">
+                  <div class="coupon-pricing">
+                    <span class="old-price">Regular S/ 37.00</span>
+                    <strong class="new-price">S/ 25.90</strong>
+                  </div>
+                  <button class="btn-redeem-coupon" onclick="redeemCouponDirect('2 Whopper® Jr. + 2 Papas Regulares', 25.90, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&auto=format&fit=crop&q=80')">Canjear <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coupon 2: Duo Stacker Doble -->
+            <div class="coupon-card">
+              <div class="coupon-card-media">
+                <span class="coupon-badge-top-left bacon-tag"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg> BACON LOVER</span>
+                <span class="coupon-badge-top-right">⭐ Ganas 55 Coronas</span>
+                <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500&auto=format&fit=crop&q=80" alt="Dúo Stacker">
+              </div>
+              <div class="coupon-card-body">
+                <h4>Dúo Stacker Doble + 2 Bebidas</h4>
+                <p>2 Hamburguesas Stacker Doble con tocino crocante, queso fundido y 2 vasos de 16oz...</p>
+                <div class="coupon-card-footer">
+                  <div class="coupon-pricing">
+                    <span class="old-price">Regular S/ 52.00</span>
+                    <strong class="new-price">S/ 38.00</strong>
+                  </div>
+                  <button class="btn-redeem-coupon" onclick="redeemCouponDirect('Dúo Stacker Doble + 2 Bebidas', 38.00, 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=200&auto=format&fit=crop&q=80')">Canjear <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coupon 3: 2 Sundaes -->
+            <div class="coupon-card">
+              <div class="coupon-card-media">
+                <span class="coupon-badge-top-left sweet-tag"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4c0 .7.2 1.4.5 2H4a2 2 0 0 0-2 2v2h20v-2a2 2 0 0 0-2-2h-4.5c.3-.6.5-1.3.5-2a4 4 0 0 0-4-4z"/><path d="M3 14v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/></svg> DÚO DULCE</span>
+                <span class="coupon-badge-top-right">⭐ Ganas 15 Coronas</span>
+                <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&auto=format&fit=crop&q=80" alt="2 Sundaes">
+              </div>
+              <div class="coupon-card-body">
+                <h4>2 Sundaes Chocolate o Caramelo</h4>
+                <p>Helado suave y cremoso de vainilla bañado en abundante salsa caliente a tu gusto.</p>
+                <div class="coupon-card-footer">
+                  <div class="coupon-pricing">
+                    <span class="old-price">Regular S/ 13.80</span>
+                    <strong class="new-price">S/ 8.90</strong>
+                  </div>
+                  <button class="btn-redeem-coupon" onclick="redeemCouponDirect('2 Sundaes Chocolate o Caramelo', 8.90, 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=200&auto=format&fit=crop&q=80')">Canjear <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coupon 4: King Box Familiar -->
+            <div class="coupon-card">
+              <div class="coupon-card-media">
+                <span class="coupon-badge-top-left family-tag"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> AHORRO FAMILIAR 35%</span>
+                <span class="coupon-badge-top-right">⭐ Ganas 110 Coronas</span>
+                <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=500&auto=format&fit=crop&q=80" alt="King Box Familiar">
+              </div>
+              <div class="coupon-card-body">
+                <h4>King Box Familiar (4 Personas)</h4>
+                <p>2 Whopper® + 2 Cheeseburgers + 4 Papas medianas + 10 King Nuggets + 4 Bebidas...</p>
+                <div class="coupon-card-footer">
+                  <div class="coupon-pricing">
+                    <span class="old-price">Regular S/ 108.00</span>
+                    <strong class="new-price">S/ 69.90</strong>
+                  </div>
+                  <button class="btn-redeem-coupon" onclick="redeemCouponDirect('King Box Familiar (4 Personas)', 69.90, 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=200&auto=format&fit=crop&q=80')">Canjear <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Physical Paper Coupon Box -->
+          <div class="paper-coupon-card">
+            <div class="paper-header">
+              <span class="ticket-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9a3 3 0 0 1 0 6v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a3 3 0 0 1 0-6V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v5z"/></svg></span>
+              <strong>¿Tienes un cupón impreso o volante?</strong>
+            </div>
+            <p>Ingresa el código alfanumérico que aparece al reverso de tu ticket físico para transferirlo a tu bolsa digital.</p>
+            <div class="paper-input-row">
+              <input type="text" class="bk-input text-uppercase" id="paperCodeInput" placeholder="Ej: PERU-BK-7749" value="PERU-BK-7749">
+              <button class="btn-brown-code" onclick="validatePaperCode()">Validar Código <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav-bar">
+          <button class="bottom-tab-btn" data-nav-target="02-inicio" onclick="switchScreen('02-inicio')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="tab-txt">Inicio</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="03-menu" onclick="switchScreen('03-menu')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a1 1 0 0 0 1-1C20.5 5.5 16.5 3 12 3S3.5 5.5 3 10a1 1 0 0 0 1 1z"/><path d="M3 17h18a2 2 0 0 1 0 4H3a2 2 0 0 1 0-4z"/><path d="M4 14h16"/></svg></span>
+            <span class="tab-txt">Menú</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="09-coronas" onclick="switchScreen('09-coronas')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+            <span class="tab-txt">Coronas</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="08-cupones" onclick="switchScreen('08-cupones')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+            <span class="tab-txt">Cupones</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="07-tracker" onclick="switchScreen('07-tracker')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+            <span class="tab-txt">Pedidos</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="10-perfil" onclick="switchScreen('10-perfil')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span class="tab-txt">Yo</span>
+          </button>
+        </nav>
+      </section>
+
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 09: CLUB DE CORONAS (/loyalty/rewards)              -->
+      <!-- ========================================================= -->
+      <section class="screen-view" id="view-09-coronas" data-screen="09-coronas">
+        <header class="app-header">
+          <div class="header-brand-left" onclick="switchScreen('02-inicio')" style="cursor:pointer;">
+            <div class="bk-mini-logo">BK</div>
+            <div class="brand-text-col">
+              <span class="brand-country">PERÚ</span>
+              <strong class="brand-page-title">Coronas</strong>
+            </div>
+          </div>
+          <div class="header-right-actions">
+            <div class="coronas-coin-pill" onclick="switchScreen('09-coronas')" title="Tus Coronas BK">
+              <span class="coin-symbol"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+              <span class="coin-val">450</span>
+            </div>
+            <div class="header-cart-icon-btn" onclick="switchScreen('05-cart')" title="Ver Carrito">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+              <span class="cart-badge-pill">3</span>
+            </div>
+            <div class="user-avatar-circle" onclick="switchScreen('10-perfil')" title="Mi Cuenta">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Camila">
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-normal">
+          <!-- Golden Loyalty Card -->
+          <div class="royale-loyalty-card">
+            <div class="card-brand-row">
+              <span class="badge-bk-rewards"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg> BURGER KING REWARDS</span>
+              <span class="brand-tag">Club de Coronas</span>
+            </div>
+
+            <div class="user-greeting-points">
+              <div class="greeting-left">
+                <span class="greeting-name">¡Hola, Camila!</span>
+                <div class="points-balance-row">
+                  <span class="points-number" id="loyaltyCardBalance">450</span>
+                  <span class="points-label">Coronas</span>
+                </div>
+              </div>
+              <div class="tier-pill-fire">
+                <span><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg> Fuego</span>
+              </div>
+            </div>
+
+            <div class="tier-progress-block">
+              <div class="tier-title-row">
+                <span class="tier-current">Nivel 2 de 3: <strong>Rey Fuego</strong></span>
+                <span class="tier-next">Faltan 150 para <strong>Suprema</strong></span>
+              </div>
+              <div class="progress-track-gold">
+                <div class="progress-fill-gold" style="width: 75%;"></div>
+              </div>
+              <div class="progress-labels-row">
+                <span>450 actual</span>
+                <span>600 Corona Suprema</span>
+              </div>
+            </div>
+
+            <div class="loyalty-card-footer">
+              <span class="expiration-text">Vencimiento: 31 Dic 2026</span>
+              <a href="javascript:void(0)" class="history-link" onclick="openRewardsHistoryModal()">Historial <svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+          </div>
+
+          <!-- Explore by Points Section -->
+          <div class="rewards-explore-section">
+            <div class="explore-header-row">
+              <div class="explore-title-col">
+                <h3>Explora por Coronas</h3>
+                <span class="explore-sub">450 canjeables</span>
+              </div>
+            </div>
+
+            <div class="filter-pills-row">
+              <button class="filter-pill active" onclick="filterRewardCatalog('all', this)">Todos</button>
+              <button class="filter-pill" onclick="filterRewardCatalog('100', this)">100 Coronas</button>
+              <button class="filter-pill" onclick="filterRewardCatalog('250', this)">250 Coronas</button>
+            </div>
+
+            <!-- Rewards Catalog List -->
+            <div class="rewards-catalog-list">
+              <!-- Reward 1: Papas o Bebida (100 Coronas) -->
+              <div class="reward-item-card" data-cost="100">
+                <div class="reward-media-wrap">
+                  <span class="badge-cost">⭐ 100 Coronas</span>
+                  <span class="badge-ready">¡Listo para canjear!</span>
+                  <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500&auto=format&fit=crop&q=80" alt="Papas Medianas">
+                </div>
+                <div class="reward-body">
+                  <h4>Papas Medianas o Bebida Grande</h4>
+                  <p>El acompañamiento perfecto para tu pedido del día. Crujientes o ultra refrescante.</p>
+                  <div class="reward-footer-row">
+                    <span class="status-sufficient">Tienes saldo suficiente</span>
+                    <button class="btn-redeem-flame" onclick="claimLoyaltyReward('Papas Medianas', 100, 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=200&auto=format&fit=crop&q=80')">Canjear Ahora</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reward 2: Aros de Cebolla o Sundae (150 Coronas) -->
+              <div class="reward-item-card" data-cost="150">
+                <div class="reward-media-wrap">
+                  <span class="badge-cost">⭐ 150 Coronas</span>
+                  <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=500&auto=format&fit=crop&q=80" alt="Aros o Sundae">
+                </div>
+                <div class="reward-body">
+                  <h4>Aros de Cebolla o Sundae Tentación</h4>
+                  <p>Elige entre el crocante sabor de la cebolla empanizada o la dulzura cremosa del helado BK.</p>
+                  <div class="reward-footer-row">
+                    <span class="status-sufficient">Tienes saldo suficiente</span>
+                    <button class="btn-redeem-flame" onclick="claimLoyaltyReward('Aros de Cebolla o Sundae', 150, 'https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=200&auto=format&fit=crop&q=80')">Canjear Ahora</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reward 3: Whopper Clásica Gratis (300 Coronas) -->
+              <div class="reward-item-card" data-cost="300">
+                <div class="reward-media-wrap">
+                  <span class="badge-cost">⭐ 300 Coronas</span>
+                  <span class="badge-instant"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg> Canje Inmediato</span>
+                  <span class="badge-house-fav">⭐ FAVORITO DE LA CASA</span>
+                  <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&auto=format&fit=crop&q=80" alt="Whopper Clásica">
+                </div>
+                <div class="reward-body">
+                  <h4>Whopper® Clásica Gratis</h4>
+                  <p>100% carne de res a la parrilla, tomates frescos y lechuga recién cortada. El rey indiscutible.</p>
+                  <div class="reward-footer-row">
+                    <div class="reward-extra-info">
+                      <span class="highlight-leftover">¡Te sobran 150 Coronas!</span>
+                      <span class="regular-value-note">Valor regular S/ 19.90</span>
+                    </div>
+                    <button class="btn-redeem-flame" onclick="claimLoyaltyReward('Whopper® Clásica Gratis', 300, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&auto=format&fit=crop&q=80')">Canjear Ahora</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reward 4: Mega Stacker Doble (500 Coronas - Locked) -->
+              <div class="reward-item-card locked" data-cost="500">
+                <div class="reward-media-wrap">
+                  <span class="badge-cost">⭐ 500 Coronas</span>
+                  <span class="badge-locked"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Faltan 50 pts</span>
+                  <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500&auto=format&fit=crop&q=80" alt="Mega Stacker">
+                </div>
+                <div class="reward-body">
+                  <h4>Mega Stacker Doble o King Pollo</h4>
+                  <p>Doble carne a la parrilla, salsa Stacker y tocino crujiente. Tu próxima gran conquista.</p>
+                  <div class="reward-footer-row">
+                    <div class="locked-progress-col">
+                      <span class="locked-pct">450 / 500 (90% completado)</span>
+                    </div>
+                    <button class="btn-locked-gray" onclick="showToast('¡Te faltan 50 Coronas! Haz un pedido para desbloquear')">
+                      <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Desbloquear promo</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Cómo ganar más Coronas -->
+          <div class="earn-more-section">
+            <div class="earn-header">
+              <span class="flame-icon"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg></span>
+              <div>
+                <h3>¿Cómo ganar más Coronas?</h3>
+                <p>Sube de nivel y desbloquea beneficios exclusivos de la realeza a la parrilla.</p>
+              </div>
+            </div>
+
+            <div class="earn-benefits-list">
+              <!-- Benefit 1 -->
+              <div class="benefit-card">
+                <span class="benefit-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                <div class="benefit-info">
+                  <strong>Suma en cada mordisco</strong>
+                  <p>Gana <strong>10 Coronas por cada S/ 1 gastado</strong> en pedidos por delivery o para recoger en tienda desde la app.</p>
+                </div>
+              </div>
+
+              <!-- Benefit 2 -->
+              <div class="benefit-card">
+                <span class="benefit-icon"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg></span>
+                <div class="benefit-info">
+                  <div class="benefit-title-row">
+                    <strong>Martes a la Parrilla</strong>
+                    <span class="badge-smart">2x pts</span>
+                  </div>
+                  <p>Doble puntaje automático todos los martes en combos Whopper® y familiares.</p>
+                </div>
+              </div>
+
+              <!-- Benefit 3 -->
+              <div class="benefit-card clickable" onclick="showMissionsModal()">
+                <span class="benefit-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></span>
+                <div class="benefit-info">
+                  <strong>Misiones de la Semana</strong>
+                  <p>Cumple pequeños retos de antojo: prueba un postre nuevo o pide 2 veces en 7 días y llévate hasta <strong>+150 Coronas extra</strong>.</p>
+                  <span class="link-action-missions">Ver misiones activas (2 disponibles) +</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav-bar">
+          <button class="bottom-tab-btn" data-nav-target="02-inicio" onclick="switchScreen('02-inicio')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="tab-txt">Inicio</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="03-menu" onclick="switchScreen('03-menu')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a1 1 0 0 0 1-1C20.5 5.5 16.5 3 12 3S3.5 5.5 3 10a1 1 0 0 0 1 1z"/><path d="M3 17h18a2 2 0 0 1 0 4H3a2 2 0 0 1 0-4z"/><path d="M4 14h16"/></svg></span>
+            <span class="tab-txt">Menú</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="09-coronas" onclick="switchScreen('09-coronas')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+            <span class="tab-txt">Coronas</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="08-cupones" onclick="switchScreen('08-cupones')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+            <span class="tab-txt">Cupones</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="07-tracker" onclick="switchScreen('07-tracker')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+            <span class="tab-txt">Pedidos</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="10-perfil" onclick="switchScreen('10-perfil')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span class="tab-txt">Yo</span>
+          </button>
+        </nav>
+      </section>
+
+
+      <!-- ========================================================= -->
+      <!-- SCREEN 10: MI PERFIL (/perfil)                            -->
+      <!-- ========================================================= -->
+      <section class="screen-view" id="view-10-perfil" data-screen="10-perfil">
+        <header class="app-header">
+          <div class="header-brand-left" onclick="switchScreen('02-inicio')" style="cursor:pointer;">
+            <div class="bk-mini-logo">BK</div>
+            <div class="brand-text-col">
+              <span class="brand-country">PERÚ</span>
+              <strong class="brand-page-title">Mi Perfil</strong>
+            </div>
+          </div>
+          <div class="header-right-actions">
+            <div class="coronas-coin-pill" onclick="switchScreen('09-coronas')" title="Tus Coronas BK">
+              <span class="coin-symbol"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+              <span class="coin-val">450</span>
+            </div>
+            <div class="header-cart-icon-btn" onclick="switchScreen('05-cart')" title="Ver Carrito">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+              <span class="cart-badge-pill">3</span>
+            </div>
+            <div class="user-avatar-circle" onclick="switchScreen('10-perfil')" title="Mi Cuenta">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80" alt="Camila">
+            </div>
+          </div>
+        </header>
+
+        <div class="screen-scroll-body screen-pb-normal">
+          <!-- Profile Card -->
+          <div class="profile-header-card">
+            <div class="profile-avatar-row">
+              <div class="avatar-wrap-edit">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&q=80" alt="Camila Rodríguez">
+                <button class="avatar-edit-badge" onclick="openEditProfileModal()"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              </div>
+              <div class="profile-details-col">
+                <div class="profile-name-row">
+                  <h2 class="profile-name">Camila Rodríguez</h2>
+                  <span class="verified-crown"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+                </div>
+                <span class="profile-email">camila.rodriguez@email.pe</span>
+                <span class="profile-phone"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> <span id="profilePhoneText">+51 987 654 321</span></span>
+                <div class="membership-pill">
+                  <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg> Miembro King</span>
+                  <span>•</span>
+                  <span>Desde Octubre 2023</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flame Loyalty Banner -->
+          <div class="profile-rewards-banner flame-gradient-bg">
+            <div class="banner-top-row">
+              <span class="badge-tier-tag"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg> Nivel Rey Fuego</span>
+              <span class="next-tier-tag">Siguiente: Rey Supremo</span>
+            </div>
+            <div class="banner-balance-row">
+              <div class="balance-number-col">
+                <span class="coronas-num">450</span>
+                <span class="coronas-lbl">Coronas</span>
+              </div>
+              <button class="btn-canjear-white" onclick="switchScreen('09-coronas')"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg> Canjear</button>
+            </div>
+            <p class="banner-footnote">¡Te faltan solo 150 Coronas para un Whopper® gratis!</p>
+          </div>
+
+          <!-- User Stats Grid (3 cards) -->
+          <div class="profile-stats-grid">
+            <div class="stat-card" onclick="switchScreen('07-tracker')">
+              <span class="stat-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+              <strong class="stat-value">14</strong>
+              <span class="stat-label">Pedidos hechos</span>
+            </div>
+            <div class="stat-card" onclick="switchScreen('08-cupones')">
+              <span class="stat-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+              <strong class="stat-value">5</strong>
+              <span class="stat-label">Cupones listos</span>
+            </div>
+            <div class="stat-card" onclick="switchScreen('03-menu')">
+              <span class="stat-icon"><svg class="bk-icon-sm icon-fav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+              <strong class="stat-value">2</strong>
+              <span class="stat-label">Favoritos BK</span>
+            </div>
+          </div>
+
+          <!-- Favorite Combo Widget -->
+          <div class="favorite-combo-card">
+            <div class="fav-header-row">
+              <div class="fav-title">
+                <span class="heart-icon"><svg class="bk-icon-sm icon-fav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+                <strong>Tu combo predilecto</strong>
+              </div>
+              <span class="badge-frequent">FRECUENTE</span>
+            </div>
+            <div class="fav-body-row">
+              <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&auto=format&fit=crop&q=80" alt="Whopper Doble">
+              <div class="fav-info">
+                <h4>Whopper® Doble + Papas</h4>
+                <p>En combo: Salsa BBQ extra</p>
+                <div class="fav-price-row">
+                  <span class="fav-price">S/ 27.90</span>
+                  <button class="btn-order-fav" onclick="addToCartDirect('Whopper® Doble + Papas', 27.90, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&auto=format&fit=crop&q=80', 'En combo con papas y BBQ')">Pedir ya</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Ajustes & Gestión -->
+          <div class="profile-menu-section">
+            <h3 class="section-heading">Ajustes & Gestión</h3>
+
+            <!-- Item: Direcciones -->
+            <div class="settings-group-card">
+              <div class="settings-item-header">
+                <div class="item-header-left">
+                  <span class="menu-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                  <strong>Direcciones guardadas</strong>
+                </div>
+                <button class="link-edit-btn" onclick="openEditAddressModal()">Editar</button>
+              </div>
+              <div class="address-sub-items">
+                <div class="address-sub-row" onclick="selectSavedAddress('Av. Alfredo Benavides 402, Dpto 501, Miraflores', 'Principal (Miraflores)')">
+                  <div>
+                    <div class="addr-tag-row">
+                      <strong>Principal (Miraflores)</strong>
+                      <span class="badge-default">PREDETERMINADA</span>
+                    </div>
+                    <span class="addr-text">Av. Benavides 402, Dpto 501</span>
+                  </div>
+                  <span class="chevron-right"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+                </div>
+                <div class="address-sub-row" onclick="selectSavedAddress('Av. Canaval y Moreyra 380, Piso 12, San Isidro', 'Oficina (San Isidro)')">
+                  <div>
+                    <strong>Oficina (San Isidro)</strong>
+                    <span class="addr-text">Av. Canaval y Moreyra 380</span>
+                  </div>
+                  <span class="chevron-right"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item: Métodos de Pago -->
+            <div class="settings-group-card">
+              <div class="settings-item-header">
+                <div class="item-header-left">
+                  <span class="menu-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+                  <strong>Métodos de pago</strong>
+                </div>
+                <button class="link-edit-btn" onclick="openAddCardModal()">+ Agregar</button>
+              </div>
+              <div class="payment-chips-row">
+                <div class="pay-chip">
+                  <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Débito Visa •••• 4821</span>
+                  <span class="chip-status">Principal</span>
+                </div>
+                <div class="pay-chip">
+                  <span><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg> <span id="profileYapeText">Yape 987 654 321</span></span>
+                  <span class="chip-status">Vinculado</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item: Preferencias A Tu Manera -->
+            <div class="settings-row-item" onclick="showToast('Configurando preferencias fijas de cocina')">
+              <div class="item-left">
+                <span class="menu-icon"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+                <div>
+                  <strong>Preferencias "A tu manera"</strong>
+                  <span class="item-sub">Sin cebolla por defecto, salsas favoritas</span>
+                </div>
+              </div>
+              <span class="chevron-right"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </div>
+
+            <!-- Item: Ofertas Flash Toggle -->
+            <div class="settings-row-item">
+              <div class="item-left">
+                <span class="menu-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+                <div>
+                  <strong>Ofertas Flash y WhatsApp</strong>
+                  <span class="item-sub">Cupones exclusivos y avisos de delivery</span>
+                </div>
+              </div>
+              <label class="switch-control">
+                <input type="checkbox" checked onchange="showToast('Notificaciones actualizadas')">
+                <span class="slider round"></span>
+              </label>
+            </div>
+
+            <!-- Item: Seguridad Biométrica Toggle -->
+            <div class="settings-row-item">
+              <div class="item-left">
+                <span class="menu-icon"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <div>
+                  <strong>Seguridad biométrica</strong>
+                  <span class="item-sub">Face ID / Huella digital para confirmar</span>
+                </div>
+              </div>
+              <label class="switch-control">
+                <input type="checkbox" checked onchange="showToast('Biometría Face ID activa')">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Section: Soporte y Normativa Perú -->
+          <div class="profile-menu-section">
+            <h3 class="section-heading">Soporte y Normativa Perú</h3>
+
+            <!-- Item: WhatsApp BK Soporte -->
+            <div class="settings-row-item" onclick="openSupportWhatsApp()">
+              <div class="item-left">
+                <span class="menu-icon"><svg class="bk-icon icon-whatsapp" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg></span>
+                <div>
+                  <div class="title-with-badge">
+                    <strong>WhatsApp BK Soporte Perú</strong>
+                    <span class="dot-online"></span>
+                  </div>
+                  <span class="item-sub">Respuesta promedio: &lt; 2 min</span>
+                </div>
+              </div>
+              <span class="external-icon">↗</span>
+            </div>
+
+            <!-- Item: Libro de Reclamaciones Virtual (Indecopi) -->
+            <div class="settings-row-item" onclick="openLibroReclamaciones()">
+              <div class="item-left">
+                <span class="menu-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="22" x2="22" y2="22"/><polyline points="2 7 12 2 22 7"/><line x1="6" y1="7" x2="6" y2="22"/><line x1="10" y1="7" x2="10" y2="22"/><line x1="14" y1="7" x2="14" y2="22"/><line x1="18" y1="7" x2="18" y2="22"/></svg></span>
+                <div>
+                  <strong>Libro de Reclamaciones Virtual</strong>
+                  <span class="item-sub">Conforme al Código de Protección al Consumidor</span>
+                </div>
+              </div>
+              <span class="chevron-right"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </div>
+
+            <!-- Item: Términos y Privacidad -->
+            <div class="settings-row-item" onclick="openLegalModal()">
+              <div class="item-left">
+                <span class="menu-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                <div>
+                  <strong>Términos, Privacidad & Coronas</strong>
+                  <span class="item-sub">Políticas de BK Perú v3.0</span>
+                </div>
+              </div>
+              <span class="chevron-right"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </div>
+          </div>
+
+          <!-- Logout Button -->
+          <div class="logout-action-box">
+            <button class="btn-logout-pill" onclick="handleLogout()">
+              <span><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Cerrar Sesión</span>
+            </button>
+            <p class="company-disclaimer">
+              Burger King® Perú • Operado por Delosi S.A.<br>
+              Versión 3.0.1 (Flame Engine)
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav-bar">
+          <button class="bottom-tab-btn" data-nav-target="02-inicio" onclick="switchScreen('02-inicio')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="tab-txt">Inicio</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="03-menu" onclick="switchScreen('03-menu')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16a1 1 0 0 0 1-1C20.5 5.5 16.5 3 12 3S3.5 5.5 3 10a1 1 0 0 0 1 1z"/><path d="M3 17h18a2 2 0 0 1 0 4H3a2 2 0 0 1 0-4z"/><path d="M4 14h16"/></svg></span>
+            <span class="tab-txt">Menú</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="09-coronas" onclick="switchScreen('09-coronas')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="2 4 5 18 19 18 22 4 15 10 12 4 9 10 2 4"/></svg></span>
+            <span class="tab-txt">Coronas</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="08-cupones" onclick="switchScreen('08-cupones')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+            <span class="tab-txt">Cupones</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="07-tracker" onclick="switchScreen('07-tracker')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+            <span class="tab-txt">Pedidos</span>
+          </button>
+          <button class="bottom-tab-btn" data-nav-target="10-perfil" onclick="switchScreen('10-perfil')">
+            <span class="tab-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span class="tab-txt">Yo</span>
+          </button>
+        </nav>
+      </section>
+
+      <!-- Bottom Phone Indicator Bar -->
+      
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- MODAL: LIBRO DE RECLAMACIONES VIRTUAL (INDECOPI PERÚ)     -->
+  <!-- ========================================================= -->
+  <div class="modal-backdrop" id="modalLibroReclamaciones">
+    <div class="modal-dialog-sheet">
+      <div class="modal-header">
+        <div class="modal-header-brand">
+          <span class="institution-icon"><svg class="bk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="22" x2="22" y2="22"/><polyline points="2 7 12 2 22 7"/><line x1="6" y1="7" x2="6" y2="22"/><line x1="10" y1="7" x2="10" y2="22"/><line x1="14" y1="7" x2="14" y2="22"/><line x1="18" y1="7" x2="18" y2="22"/></svg></span>
+          <div>
+            <strong>Libro de Reclamaciones Virtual</strong>
+            <span class="modal-sub">Delosi S.A. • RUC 20100106979</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modalLibroReclamaciones')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-scroll-body">
+        <p class="indecopi-legal-note">
+          Conforme a lo establecido en el Código de Protección y Defensa del Consumidor (Ley N° 29571) y el D.S. 011-2011-PCM.
+        </p>
+
+        <form id="formReclamaciones" onsubmit="submitReclamacion(event)">
+          <div class="form-group">
+            <label class="field-label">TIPO DE RECLAMO</label>
+            <div class="segmented-claim-type">
+              <label class="claim-type-label">
+                <input type="radio" name="claimType" value="queja" checked>
+                <span>Queja (Malestar de atención)</span>
+              </label>
+              <label class="claim-type-label">
+                <input type="radio" name="claimType" value="reclamo">
+                <span>Reclamo (Disconformidad con producto)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">NOMBRE COMPLETO</label>
+            <input type="text" class="bk-input" required value="Camila Rodríguez">
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="field-label">TIPO DOC</label>
+              <select class="bk-select">
+                <option value="DNI">DNI</option>
+                <option value="CE">Carné Extranjería</option>
+                <option value="PAS">Pasaporte</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="field-label">N° DOCUMENTO</label>
+              <input type="text" class="bk-input" required value="72849103">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">CORREO ELECTRÓNICO</label>
+            <input type="email" class="bk-input" required value="camila.rodriguez@email.pe">
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">TELÉFONO DE CONTACTO</label>
+            <input type="tel" class="bk-input" required value="+51 987 654 321">
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">SEDE / TIENDA</label>
+            <select class="bk-select">
+              <option value="Miraflores" selected>Burger King Benavides (Miraflores)</option>
+              <option value="Jockey">Burger King Jockey Plaza</option>
+              <option value="SanIsidro">Burger King San Isidro</option>
+              <option value="SanMiguel">Burger King San Miguel</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">CÓDIGO DE PEDIDO (OPCIONAL)</label>
+            <input type="text" class="bk-input" value="BK-84920">
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">DETALLE DEL RECLAMO O QUEJA</label>
+            <textarea class="instructions-textarea" rows="4" required placeholder="Describe los hechos ocurridos de manera clara y precisa..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">PEDIDO DEL CONSUMIDOR</label>
+            <textarea class="instructions-textarea" rows="2" required placeholder="Indica qué solución o atención requieres..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary-flame w-full mt-md">
+            <span>Enviar Hoja de Reclamación</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MODAL: TÉRMINOS Y PRIVACIDAD                              -->
+  <!-- ========================================================= -->
+  <div class="modal-backdrop" id="modalLegal">
+    <div class="modal-dialog-sheet">
+      <div class="modal-header">
+        <strong>Términos del Servicio y Privacidad</strong>
+        <button class="modal-close-btn" onclick="closeModal('modalLegal')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-scroll-body">
+        <h4>1. Disposiciones Generales</h4>
+        <p>El uso de la aplicación móvil de Burger King Perú (Delosi S.A.) está sujeto a los términos y condiciones vigentes en la República del Perú. Todos los precios mostrados incluyen el Impuesto General a las Ventas (18% IGV).</p>
+        <h4 class="mt-md">2. Programa de Fidelidad "Club de Coronas"</h4>
+        <p>Las coronas acumuladas tienen vigencia anual y pueden ser canjeadas por productos específicos del catálogo oficial. No son canjeables por dinero en efectivo.</p>
+        <h4 class="mt-md">3. Pasarela de Pagos Segura</h4>
+        <p>Las transacciones vía Yape, Plin y BCP se procesan con tokenización bancaria PCI-DSS.</p>
+      </div>
+    </div>
+  </div>
+
+  
+
+  
+
+  
+  <!-- Modal: Editar Perfil de Usuario -->
+  <div class="modal-backdrop" id="modalEditProfile">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <strong>Editar Mi Perfil BK</strong>
+        <button class="modal-close-btn" onclick="closeModal('modalEditProfile')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <form class="modal-scroll-body" onsubmit="saveProfileModal(event)">
+        <div class="form-group">
+          <label class="field-label">NOMBRE COMPLETO</label>
+          <input type="text" class="bk-input" id="editProfName" required>
+        </div>
+        <div class="form-group mt-sm">
+          <label class="field-label">CORREO ELECTRÓNICO</label>
+          <input type="email" class="bk-input" id="editProfEmail" required>
+        </div>
+        <div class="form-group mt-sm">
+          <label class="field-label">TELÉFONO CELULAR (+51)</label>
+          <input type="tel" class="bk-input" id="editProfPhone" required>
+        </div>
+        <button type="submit" class="btn-primary-flame w-full mt-md">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Editar Dirección y Nota de Entrega -->
+  <div class="modal-backdrop" id="modalEditAddress">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <strong>Dirección de Entrega</strong>
+        <button class="modal-close-btn" onclick="closeModal('modalEditAddress')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <form class="modal-scroll-body" onsubmit="saveAddressModal(event)">
+        <div class="form-group">
+          <label class="field-label">DIRECCIÓN EXACTA (DISTRITO / CALLE / DPTO)</label>
+          <input type="text" class="bk-input" id="editAddrInput" required value="Av. Alfredo Benavides 402, Dpto 501, Miraflores">
+        </div>
+        <div class="form-group mt-sm">
+          <label class="field-label">REFERENCIA O NOTA PARA EL REPARTIDOR</label>
+          <input type="text" class="bk-input" id="editAddrNoteInput" value="Dejar en recepción • Tocar intercomunicador 501">
+        </div>
+        <button type="submit" class="btn-primary-flame w-full mt-md">Actualizar Dirección</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Añadir Tarjeta Bancaria -->
+  <div class="modal-backdrop" id="modalAddCard">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <strong>Vincular Tarjeta Bancaria</strong>
+        <button class="modal-close-btn" onclick="closeModal('modalAddCard')"><svg class="bk-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <form class="modal-scroll-body" onsubmit="saveNewCardModal(event)">
+        <div class="form-group">
+          <label class="field-label">NÚMERO DE TARJETA (VISA / MASTERCARD / AMEX)</label>
+          <input type="text" class="bk-input" id="newCardNumber" placeholder="4557 8800 1234 9920" maxlength="19" required>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" class="mt-sm">
+          <div class="form-group">
+            <label class="field-label">VENCIMIENTO</label>
+            <input type="text" class="bk-input" placeholder="08/29" maxlength="5" required>
+          </div>
+          <div class="form-group">
+            <label class="field-label">CVV</label>
+            <input type="password" class="bk-input" placeholder="•••" maxlength="4" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary-flame w-full mt-md">Vincular Tarjeta Segura</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Floating Element -->
+  <div class="toast-notification" id="toastMessage">
+    <span class="toast-icon" id="toastIcon"><svg class="bk-icon icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3.5z"/></svg></span>
+    <span class="toast-text" id="toastText">¡Acción exitosa!</span>
+  </div>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
