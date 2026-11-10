@@ -22,3 +22,4 @@ node server.js
 ```
 
 Luego abre `http://localhost:3000` en tu navegador o empaqueta como APK/PWA mediante `manifest.json` y `sw.js`.
+
