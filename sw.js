@@ -1,11 +1,11 @@
 // Burger King Perú Service Worker (PWA)
-const CACHE_NAME = 'bk-peru-v4';
+const CACHE_NAME = 'bk-peru-v5';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json'
+  './',
+  './index.html',
+  './style.css',
+  './app.js',
+  './manifest.json'
 ];
 
 self.addEventListener('install', (e) => {
