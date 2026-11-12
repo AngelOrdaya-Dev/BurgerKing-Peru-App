@@ -295,13 +295,13 @@ function syncUserProfileUI() {
   }
 }
 
-function saveAndApplyUser(name, contactRaw) {
-  const cleanName = (name || '').trim() || 'Camila Rodríguez';
+function saveAndApplyUser(name, contactRaw, emailRaw) {
+  const cleanName = (name || '').trim() || 'Cliente BK';
   const rawContact = (contactRaw || '').trim() || '987 654 321';
   const isEmail = rawContact.includes('@');
 
-  const phone = isEmail ? appState.user.phone : (rawContact.startsWith('+51') ? rawContact : `+51 ${rawContact}`);
-  const email = isEmail ? rawContact : `${cleanName.toLowerCase().replace(/[^a-z0-9]/g, '.').replace(/\.+/g, '.')}@email.pe`;
+  const phone = isEmail ? (appState.user.phone || '+51 987 654 321') : (rawContact.startsWith('+51') ? rawContact : `+51 ${rawContact}`);
+  const email = (emailRaw && emailRaw.trim()) ? emailRaw.trim() : (isEmail ? rawContact : `${cleanName.toLowerCase().replace(/[^a-z0-9]/g, '.').replace(/\.+/g, '.')}@email.pe`);
   const isCamila = cleanName.toLowerCase().includes('camila');
 
   appState.user = {
@@ -319,91 +319,105 @@ function saveAndApplyUser(name, contactRaw) {
   syncUserProfileUI();
 }
 
-function toggleAuthTab(type) {
-  const tabPhone = document.getElementById('tabPhone');
-  const tabEmail = document.getElementById('tabEmail');
-  const groupPhone = document.getElementById('groupPhone');
-  const prefix = document.getElementById('phoneCountryPrefix');
-  const input = document.getElementById('loginPhoneInput');
+function switchAuthMode(mode) {
+  const tabLogin = document.getElementById('tabLogin');
+  const tabRegister = document.getElementById('tabRegister');
+  const loginSection = document.getElementById('authLoginFormSection');
+  const registerSection = document.getElementById('authRegisterFormSection');
 
-  if (type === 'phone') {
-    tabPhone.classList.add('active');
-    tabEmail.classList.remove('active');
-    groupPhone.querySelector('.field-label').textContent = 'NÚMERO DE CELULAR';
-    groupPhone.querySelector('.input-helper').textContent = 'Te enviaremos un código SMS de verificación segura.';
-    if (prefix) prefix.style.display = 'flex';
-    if (input) {
-      input.type = 'tel';
-      input.value = appState.user.phone.replace('+51 ', '');
-      input.placeholder = '987 654 321';
-    }
+  if (mode === 'register') {
+    if (tabLogin) tabLogin.classList.remove('active');
+    if (tabRegister) tabRegister.classList.add('active');
+    if (loginSection) loginSection.style.display = 'none';
+    if (registerSection) registerSection.style.display = 'block';
   } else {
-    tabPhone.classList.remove('active');
-    tabEmail.classList.add('active');
-    groupPhone.querySelector('.field-label').textContent = 'CORREO ELECTRÓNICO';
-    groupPhone.querySelector('.input-helper').textContent = 'Inicia con tu cuenta registrada en Delosi BK.';
-    if (prefix) prefix.style.display = 'none';
-    if (input) {
-      input.type = 'email';
-      input.value = appState.user.email;
-      input.placeholder = 'tu.correo@email.pe';
-    }
+    if (tabLogin) tabLogin.classList.add('active');
+    if (tabRegister) tabRegister.classList.remove('active');
+    if (loginSection) loginSection.style.display = 'block';
+    if (registerSection) registerSection.style.display = 'none';
   }
 }
 
-function togglePasswordVisibility() {
-  const input = document.getElementById('loginPasswordInput');
+function toggleAuthTab(type) {
+  switchAuthMode(type === 'register' ? 'register' : 'login');
+}
+
+function togglePasswordVisibility(targetId = 'loginPasswordInput') {
+  const input = document.getElementById(targetId) || document.getElementById('loginPasswordInput');
+  if (!input) return;
   if (input.type === 'password') {
     input.type = 'text';
-    input.value = 'BurgerKing2026!';
   } else {
     input.type = 'password';
-    input.value = '••••••••';
   }
 }
 
 function handleQuickRecognizedLogin() {
-  const nameInput = document.getElementById('loginNameInput');
-  const phoneInput = document.getElementById('loginPhoneInput');
-  saveAndApplyUser(nameInput ? nameInput.value : appState.user.name, phoneInput ? phoneInput.value : appState.user.phone);
-  const firstName = getFirstName(appState.user.name);
-  showToast(`¡Hola de nuevo, ${firstName}! Tu cuenta King está activa`, 'crown');
-  setTimeout(() => {
-    switchScreen('02-inicio');
-  }, 300);
+  handleLogin();
 }
 
 function handleLogin() {
-  const nameInput = document.getElementById('loginNameInput');
   const phoneInput = document.getElementById('loginPhoneInput');
-  saveAndApplyUser(nameInput ? nameInput.value : appState.user.name, phoneInput ? phoneInput.value : appState.user.phone);
+  const contactVal = phoneInput ? phoneInput.value.trim() : '';
+
+  if (contactVal) {
+    const normalized = contactVal.replace(/\s+/g, '').toLowerCase();
+    const found = knownUsersDB.find(u => u.match.some(m => normalized.includes(m)));
+    if (found) {
+      saveAndApplyUser(found.name, found.phone, found.email);
+    } else {
+      const isEmail = contactVal.includes('@');
+      const nameGuess = isEmail ? contactVal.split('@')[0].replace(/\./g, ' ') : 'Cliente BK';
+      saveAndApplyUser(nameGuess, contactVal, isEmail ? contactVal : '');
+    }
+  } else {
+    saveAndApplyUser('Cliente BK', '987 654 321', 'cliente@email.pe');
+  }
+
   const firstName = getFirstName(appState.user.name);
-  showToast(`¡Bienvenido(a) ${firstName}! Sesión iniciada (${appState.user.phone})`, 'crown');
+  showToast(`¡Bienvenido(a) ${firstName}! Sesión iniciada`, 'crown');
   setTimeout(() => {
     switchScreen('02-inicio');
   }, 350);
 }
 
-function handleWhatsAppLogin() {
-  const nameInput = document.getElementById('loginNameInput');
-  const phoneInput = document.getElementById('loginPhoneInput');
-  saveAndApplyUser(nameInput ? nameInput.value : appState.user.name, phoneInput ? phoneInput.value : appState.user.phone);
-  const firstName = getFirstName(appState.user.name);
-  showToast(`¡Verificado por WhatsApp! Hola, ${firstName}`, 'whatsapp');
-  setTimeout(() => {
-    switchScreen('02-inicio');
-  }, 450);
-}
+function handleRegister() {
+  const nameInput = document.getElementById('regNameInput');
+  const phoneInput = document.getElementById('regPhoneInput');
+  const emailInput = document.getElementById('regEmailInput');
 
-function handleOAuthLogin(provider) {
-  const nameInput = document.getElementById('loginNameInput');
-  const phoneInput = document.getElementById('loginPhoneInput');
-  saveAndApplyUser(nameInput ? nameInput.value : appState.user.name, phoneInput ? phoneInput.value : appState.user.phone);
-  const firstName = getFirstName(appState.user.name);
-  showToast(`Autenticado con ${provider} como ${firstName}`, 'success');
+  const nameVal = nameInput ? nameInput.value.trim() : '';
+  const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+  const emailVal = emailInput ? emailInput.value.trim() : '';
+
+  if (!nameVal) {
+    showToast('Por favor, ingresa tu nombre y apellido', 'info');
+    if (nameInput) nameInput.focus();
+    return;
+  }
+
+  if (!phoneVal && !emailVal) {
+    showToast('Ingresa tu celular o correo electrónico', 'info');
+    if (phoneInput) phoneInput.focus();
+    return;
+  }
+
+  saveAndApplyUser(nameVal, phoneVal || '987 654 321', emailVal);
+  appState.coronasBalance = (appState.coronasBalance || 0) + 100;
+
+  const firstName = getFirstName(nameVal);
+  showToast(`¡Bienvenido(a) al Club BK, ${firstName}! +100 Coronas ganadas`, 'crown');
   setTimeout(() => {
     switchScreen('02-inicio');
   }, 400);
+}
+
+function handleWhatsAppLogin() {
+  handleLogin();
+}
+
+function handleOAuthLogin(provider) {
+  handleLogin();
 }
 
 function handleGuestLogin() {
